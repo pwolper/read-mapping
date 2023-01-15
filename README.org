@@ -17,7 +17,9 @@ _“Mapping” the reads from NGS data to the genome_
 ** Groups
 Book feedback session:
 [[https://docs.google.com/document/d/1gqQZ-vmIGHv3nXg-H3GatdHKmJ-UM38COClTAJtsNO0/edit]]
+
 Chat to find groups:
 [[https://docs.google.com/document/d/1RknEWydbXxivWt1V83t9NufH-o0nXl4EqAnhhL4Eb0Y/edit]]
+
 Project and student list:
 [[https://docs.google.com/document/d/1nLNA5moYD3z_DvdHuh5t_v5nju3Gx5ferpy24_2UbcI/edit]]
