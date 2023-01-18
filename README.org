@@ -2,7 +2,7 @@
 #+description: Exam Project "Mapping the reads from NGS data to the genome"
 #+authors: Abdullah Cetinkaya, Niklas Horner, Philip Wolper
 
-* Project Outline
+* Description
 _“Mapping” the reads from NGS data to the genome_
 
 - You have sequenced a genome with Illumina sequencing machine (single-end mode) and got a list of reads in FASTA file. For each read report the coordinate of the nucleotide where is has been mapped and to which strand it has been mapped.
