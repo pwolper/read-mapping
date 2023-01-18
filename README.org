@@ -11,7 +11,7 @@ _“Mapping” the reads from NGS data to the genome_
 
 * Resources
 
-** NGS mapping
+** NGS mapping from Tutorial for learning Genomics.
 [[https://genomics.sschmeier.com/ngs-mapping/]]
 
 ** Groups
