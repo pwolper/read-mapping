@@ -4,6 +4,7 @@
 
 Link to GitHub repository: https://github.com/pwolper/read-mapping
 
+* TODO write results to separate folder.
 * Description
 _“Mapping” the reads from NGS data to the genome_
 
@@ -25,3 +26,26 @@ Chat to find groups:
 
 Project and student list:
 [[https://docs.google.com/document/d/1nLNA5moYD3z_DvdHuh5t_v5nju3Gx5ferpy24_2UbcI/edit]]
+
+* def compStrand()
+Q: l is the length of the whole read file?
+
+Shorter code suggestion:
+#+begin_src python
+
+def complementary_sequence(s):
+    s_comp = str()
+    nucl = {"A": "T", "C": "G", "T": "A", "G": "C"}
+    for position,base in enumerate(s):
+        if base not in nucl:
+            return "Not a valid DNA sequence!"
+        else:
+            s_comp += nucl[base]
+    return s_comp
+
+#+end_src
+
+* visualizations
+Maybe add a plot showing coverage for regions on the genome. Sliding window approach?
+
+
