@@ -2,6 +2,8 @@
 #+description: Exam Project "Mapping the reads from NGS data to the genome"
 #+authors: Abdullah Cetinkaya, Niklas Horner, Philip Wolper
 
+Link to GitHub repository: https://github.com/pwolper/read-mapping
+
 * Description
 _“Mapping” the reads from NGS data to the genome_
 
