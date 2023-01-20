@@ -1,3 +1,5 @@
+import time
+
 def getGenome(file):                                    #return sequences and description from fasta file (input .fasta)
                                                         #returns array of array
     from Bio import SeqIO                                   #load SeqIO from Biopython package
@@ -61,6 +63,7 @@ def Barplot(gotReads, mappedGenome, gotGenome):             #create a bar plot s
         plt.ylabel("Occurrences in Genome")
         plt.savefig(fileName)
         plt.clf()
+    print("Boxplot created!")
 
 def MapSummary(gotReads, mappedGenome, gotGenome):          #create a summary after the genome is mapped in a txt file for each genome; input return from getReads, mapGenome and getGenome
     summary = {}
@@ -83,9 +86,12 @@ def MapSummary(gotReads, mappedGenome, gotGenome):          #create a summary af
 
 
 def mapGenome(G_file, R_file):                                      #return dictionary with genome description and read as key and starting positions in genome as value
+    start = time.time()
     import re                                                       #use re for easier iterate search
     Genomes = getGenome(G_file)                                     #store sequences and description from fasta files (input .fasta)
+    print("Finished evaluating 'getGenomes'!")
     Reads = getReads(R_file)                                        #store reads to map from source file as array (input preferably txt)
+    print("Finished evaluating 'getReads'!")
     mapped = {}                                                     #create dictionary for output
     g = 0                                                           #
     for genome in Genomes[0]:
@@ -98,13 +104,13 @@ def mapGenome(G_file, R_file):                                      #return dict
             posRev = [i.start() for i in re.finditer(read, compgenome)]
             posOut = posFor + posRev
             mapped[Gen,read] = posOut
+    print("Finished mapping reads!")
     Barplot(Reads,mapped, Genomes)
     MapSummary(Reads,mapped, Genomes)
+    end = time.time()
+    print("Finished running code in",round(end-start),"s!")
     return(mapped)
 
 #call
 
 mapGenome("data/Ecoli_genome.fasta", "data/reads_new.fasta")
-
-
-
