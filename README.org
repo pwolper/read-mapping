@@ -28,9 +28,7 @@ Project and student list:
 [[https://docs.google.com/document/d/1nLNA5moYD3z_DvdHuh5t_v5nju3Gx5ferpy24_2UbcI/edit]]
 
 * def compStrand()
-Q: l is the length of the whole read file?
-
-Shorter code suggestion:
+New complmentary sequence function:
 #+begin_src python
 
 def complementary_sequence(s):
@@ -44,6 +42,9 @@ def complementary_sequence(s):
     return s_comp
 
 #+end_src
+
+* Writing data to output folder.
+How to open() filename in new folder.
 
 * visualizations
 Maybe add a plot showing coverage for regions on the genome. Sliding window approach?

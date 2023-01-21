@@ -23,29 +23,15 @@ def getReads(file):                                     #return reads to map fro
     read.close()
     return (reads)
 
-def compStrand(sequence):                               #returns the complementary string of entered sequence as string
-    sequence.upper()
-    c = str()
-    cStrand = str()
-    bases = {                                               #create dict to check complementary bases
-        "A":"T",
-        "T":"A",
-        "U":"A",
-        "C":"G",
-        "G":"C"
-    }
-    l = len(sequence)
-    for i in range(l):                                      #loop through sequence and find complementary base, store in c
-        s = sequence[i]
-        if s in bases:
-            c = bases[s]
-            if s == "U":                                    #check if RNA sequence
-                print("Sequence contains Uracil - complementary: A - RNA molecule?")
-        if s not in bases:                                  #check for non-existing base
-            c = "X"
-            print("Position", i,"not a base, X added - please revise")
-        cStrand += c                                        #add c to return string
-    return(cStrand[::-1])                                   #output reverse complementary sequence
+def compStrand(sequence):                                    #returns the complementary string of entered sequence as string
+    s_comp = str()
+    nucl = {"A": "T", "C": "G", "T": "A", "G": "C"}
+    for position,base in enumerate(sequence):
+        if base not in nucl:
+            return "Not a valid DNA sequence!"
+        else:
+            s_comp += nucl[base]
+    return s_comp[::-1]                                     #output reverse complementary sequence
 
 
 
@@ -63,7 +49,7 @@ def Barplot(gotReads, mappedGenome, gotGenome):             #create a bar plot s
         plt.ylabel("Occurrences in Genome")
         plt.savefig(fileName)
         plt.clf()
-    print("Boxplot created!")
+    print("Barplot created!")
 
 def MapSummary(gotReads, mappedGenome, gotGenome):          #create a summary after the genome is mapped in a txt file for each genome; input return from getReads, mapGenome and getGenome
     summary = {}
@@ -86,8 +72,8 @@ def MapSummary(gotReads, mappedGenome, gotGenome):          #create a summary af
 
 
 def mapGenome(G_file, R_file):                                      #return dictionary with genome description and read as key and starting positions in genome as value
-    start = time.time()
     import re                                                       #use re for easier iterate search
+    start = time.time()
     Genomes = getGenome(G_file)                                     #store sequences and description from fasta files (input .fasta)
     print("Finished evaluating 'getGenomes'!")
     Reads = getReads(R_file)                                        #store reads to map from source file as array (input preferably txt)
@@ -107,6 +93,7 @@ def mapGenome(G_file, R_file):                                      #return dict
     print("Finished mapping reads!")
     Barplot(Reads,mapped, Genomes)
     MapSummary(Reads,mapped, Genomes)
+    print("Summary file written!")
     end = time.time()
     print("Finished running code in",round(end-start),"s!")
     return(mapped)
