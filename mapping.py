@@ -35,45 +35,50 @@ def compStrand(sequence):                                    #returns the comple
 
 
 
-def Barplot(gotReads, mappedGenome, gotGenome):             #create a bar plot showing occurrence for all reads for each genome; input return from getReads, mapGenome and getGenome
+def Barplot(gotReads, mappedGenome, gotGenome, path):             #create a bar plot showing occurrence for all reads for each genome; input return from getReads, mapGenome and getGenome
     import matplotlib.pyplot as plt
+    from datetime import datetime
     number = []
     l = len(gotGenome[1])
     for i in range(l):
         for entry in gotReads:
             m = mappedGenome[gotGenome[1][i], entry]
             number.append(len(m))
-        fileName = str(gotGenome[1][i]) + ".png"
+        fileName = str(path)+ "/"+str(datetime.today().strftime('%Y-%m-%d_'))+ str(gotGenome[1][i]) + ".png"
         plt.bar(range(len(number)), number)
         plt.xlabel("Read Number in File")
         plt.ylabel("Occurrences in Genome")
         plt.savefig(fileName)
         plt.clf()
-    print("Barplot created!")
+    print("Boxplot created!")
 
-def MapSummary(gotReads, mappedGenome, gotGenome):          #create a summary after the genome is mapped in a txt file for each genome; input return from getReads, mapGenome and getGenome
+def MapSummary(gotReads, mappedGenome, gotGenome, path):          #create a summary after the genome is mapped in a txt file for each genome; input return from getReads, mapGenome and getGenome
+    from datetime import datetime
     summary = {}
     l = len(gotGenome[1])
     for i in range(l):
-        fileName = str(gotGenome[1][i]) + ".txt"            #create file name for current genome from fasta description
+        fileName = str(path)+ "/" +str(datetime.today().strftime('%Y-%m-%d_'))+ str(gotGenome[1][i]) +".csv"            #create file name for current genome from fasta description
         for Read in gotReads:
             summary[Read] = mappedGenome[gotGenome[1][i], Read]      #create dictionary for read and positions (array)
         f = open(fileName, "w")                                     #create file
+        f.write("Read; Forward Start 5' -> 3'; Reverse Start 5' -> 3'; Number of Hits \n")
         for element in summary:
             f.write(element)                                        #write read
-            f.write(" : ")
-            f.write("; ".join(str(x) for x in summary[element]))    #write positions, separated by ";"
-            f.write("[")
+            f.write("; ")
+            f.write(", ".join(str(x) for x in summary[element][0]))    #write forward positions, separated by ";"
+            f.write("; ")
+            f.write(", ".join(str(x) for x in summary[element][1]))    #write backward positions, separated by ";"
+            f.write("; [")
             f.write(str(len(summary[element])))                     #write number of found positions
             f.write("]")
             f.write("\n")
         f.close()                                                   #close and save
-        summary = {}                                                #empty dictionary for next genome
+        summary = {}                                                #empty dictionary for next genome                                      #empty dictionary for next genome
 
 
-def mapGenome(G_file, R_file):                                      #return dictionary with genome description and read as key and starting positions in genome as value
-    import re                                                       #use re for easier iterate search
+def mapGenome(G_file, R_file, path ="."):                                      #return dictionary with genome description and read as key and starting positions in genome as value (returns list of list
     start = time.time()
+    import re                                                       #use re for easier iterate search
     Genomes = getGenome(G_file)                                     #store sequences and description from fasta files (input .fasta)
     print("Finished evaluating 'getGenomes'!")
     Reads = getReads(R_file)                                        #store reads to map from source file as array (input preferably txt)
@@ -88,12 +93,11 @@ def mapGenome(G_file, R_file):                                      #return dict
         for read in Reads:
             posFor = [i.start() for i in re.finditer(read, genome)]
             posRev = [i.start() for i in re.finditer(read, compgenome)]
-            posOut = posFor + posRev
+            posOut = [posFor, posRev]
             mapped[Gen,read] = posOut
     print("Finished mapping reads!")
-    Barplot(Reads,mapped, Genomes)
-    MapSummary(Reads,mapped, Genomes)
-    print("Summary file written!")
+    Barplot(Reads,mapped, Genomes, path)
+    MapSummary(Reads,mapped, Genomes, path)
     end = time.time()
     print("Finished running code in",round(end-start),"s!")
     return(mapped)
