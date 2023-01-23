@@ -111,4 +111,3 @@ def mapGenome(G_file, R_file, path ="./"):                                      
     
     
 mapGenome("data/Ecoli_genome.fasta", "data/reads_new.fasta","./output")
-=======
