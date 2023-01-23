@@ -76,9 +76,13 @@ def MapSummary(gotReads, mappedGenome, gotGenome, path):          #create a summ
         summary = {}                                                #empty dictionary for next genome                                      #empty dictionary for next genome
 
 
-def mapGenome(G_file, R_file, path ="."):                                      #return dictionary with genome description and read as key and starting positions in genome as value (returns list of list
+def mapGenome(G_file, R_file, path ="./"):                                      #return dictionary with genome description and read as key and starting positions in genome as value (returns list of list
     start = time.time()
+    import os
     import re                                                       #use re for easier iterate search
+    if not path =="./":                                              #create output path if not existing
+        if not os.path.exists(path):
+            os.makedirs(path)
     Genomes = getGenome(G_file)                                     #store sequences and description from fasta files (input .fasta)
     print("Finished evaluating 'getGenomes'!")
     Reads = getReads(R_file)                                        #store reads to map from source file as array (input preferably txt)
@@ -104,4 +108,4 @@ def mapGenome(G_file, R_file, path ="."):                                      #
 
 #call
 
-mapGenome("data/Ecoli_genome.fasta", "data/reads_new.fasta")
+mapGenome("data/Ecoli_genome.fasta", "data/reads_new.fasta","./output")
