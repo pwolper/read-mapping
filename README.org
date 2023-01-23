@@ -4,7 +4,12 @@
 
 Link to GitHub repository: https://github.com/pwolper/read-mapping
 
-* TODO write results to separate folder.
+* Tasks to-do
+- [ ] write/read results from respective folder (using os package?)
+- [ ] Make code more efficeint. Potentially parallelization?
+- [ ] Better visualizations. Read coverage with sliding window? How will this work efficiently?
+
+
 * Description
 _“Mapping” the reads from NGS data to the genome_
 
