@@ -23,15 +23,18 @@ def getReads(file):                                     #return reads to map fro
     read.close()
     return (reads)
 
-def compStrand(sequence):                                    #returns the complementary string of entered sequence as string
-    s_comp = str()
+def compStrand(sequences):                                    #returns the complementary string of entered sequence as string
+    comp_sequences = []
     nucl = {"A": "T", "C": "G", "T": "A", "G": "C"}
-    for position,base in enumerate(sequence):
-        if base not in nucl:
-            return "Not a valid DNA sequence!"
-        else:
-            s_comp += nucl[base]
-    return s_comp[::-1]                                     #output reverse complementary sequence
+    for s in sequences:
+        comp_s = str()
+        for position,base in enumerate(s):
+            if base not in nucl:
+                return "Not a valid DNA sequence!"
+            else:
+                comp_s += nucl[base]
+        comp_sequences.append(comp_s[::-1])
+    return comp_sequences                                     #output reverse complementary sequence
 
 
 
@@ -100,4 +103,3 @@ def mapGenome(G_file, R_file):                                      #return dict
 
 #call
 
-mapGenome("data/Ecoli_genome.fasta", "data/reads_new.fasta")
