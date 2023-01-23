@@ -42,7 +42,7 @@ def Barplot(gotReads, mappedGenome, gotGenome, path):             #create a bar 
     l = len(gotGenome[1])
     for i in range(l):
         for entry in gotReads:
-            m = mappedGenome[gotGenome[1][i], entry]
+            m = mappedGenome[gotGenome[1][i], entry][0] + mappedGenome[gotGenome[1][i], entry][1]
             number.append(len(m))
         fileName = str(path)+ "/"+str(datetime.today().strftime('%Y-%m-%d_'))+ str(gotGenome[1][i]) + ".png"
         plt.bar(range(len(number)), number)
