@@ -8,7 +8,7 @@ Link to GitHub repository: https://github.com/pwolper/read-mapping
 - [ ] write/read results from respective folder (using os package?)
 - [ ] Make code more efficeint. Potentially parallelization?
 - [ ] Better visualizations. Read coverage with sliding window? How will this work efficiently?
-- [ ] Fix file naming...
+- [ ] Fix file naming and fix writing the data to a file. the csv file seems to be bugged a bit. Sorry if I shot it.
 
 
 * Description
