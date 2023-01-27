@@ -67,19 +67,18 @@ def MapSummary(mappedGenome, gotGenome, path = "./"):          #create a summary
     fileName = str(path)+ "/" +str(datetime.today().strftime('%Y-%m-%d_'))+ str(gotGenome[1][0]) +".csv"            #create file name for current genome from fasta description
 
     with open(fileName, "w", newline = "") as f:                                     #create file
-        f = csv.writer(f)
-        header = ["Read; Sense; Antisense; Number of sense hits; Number of antisense hits; Number of total hits"]
+        f = csv.writer(f, delimiter = ";")
+        header = ["Read", "Sense", "Antisense", "Number of sense hits", "Number of antisense hits", "Number of total hits"]
         f.writerow(header)
         for read in mappedGenome:
-            read = read
             sense = ",".join(str(x) for x in mappedGenome[read][0])
             anti = ",".join(str(x) for x in mappedGenome[read][1])
             n_sense = len(mappedGenome[read][0])                     #write number of found positions
             n_anti = len(mappedGenome[read][1])
             n_total = n_sense + n_anti
-            cols = [read,sense,anti,n_sense,n_anti,n_total]
-            entry = ";".join(str(x) for x in cols)
-            f.writerow(entry)
+            cols = [str(read),sense,anti,str(n_sense),str(n_anti),str(n_total)]
+            f.writerow(cols)
+            # entry = ";".join(str(x) for x in cols)
 
     print("Successfully wrote summary file to",path,"!")
 

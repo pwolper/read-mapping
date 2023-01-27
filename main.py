@@ -8,7 +8,7 @@ path = "./output"
 
 # Running the read-mapper defined in mapping.py
 genome = getGenome("data/Ecoli_genome.fasta")
-Reads = getReads("data/reads_new.fasta")[0:100]
+Reads = getReads("data/reads_new.fasta")
 
 mapped = mapGenome(genome,Reads)                             #mapping reads
 
