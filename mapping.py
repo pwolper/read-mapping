@@ -2,6 +2,7 @@ import time
 import os
 import re                                                       #use re for easier iterate search
 import csv
+import sys
 from datetime import datetime
 from Bio import SeqIO                                           #load SeqIO from Biopython package
 import matplotlib.pyplot as plt
@@ -36,6 +37,7 @@ def compStrand(sequences):                                    #returns the compl
         for position,base in enumerate(s):
             if base not in nucl:
                 print("Not a valid DNA sequence! Check position",position,"!")
+                sys.exit("Script terminated...")
             else:
                 comp_s += nucl[base]
         comp_sequences.append(comp_s[::-1])
