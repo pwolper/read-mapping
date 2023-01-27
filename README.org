@@ -6,6 +6,7 @@ Link to GitHub repository: https://github.com/pwolper/read-mapping
 
 * Tasks to-do [2/3]
 - [X] write/read results from respective folder (using os package?)
+- [ ] fix complementary strand search.
 - [ ] Better visualizations. Read coverage with sliding window? How will this work efficiently?
 - [X] Fix file naming and fix writing the data to a file. the csv file seems to be bugged a bit. Sorry if I shot it.
 
