@@ -18,6 +18,9 @@ _“Mapping” the reads from NGS data to the genome_
 - Please also keep in mind that DNA is double-stranded. In Fasta file of the genome you have only one strand reported, though the read can be mapped onto any of the strand. So please check both strands.
 - Please provide the infographics showing how many reads have been mapped to the genome, how many have been mapped several times (how many times exactly?), how many haven’t been mapped.
 
+* visualizations
+Maybe add a plot showing coverage for regions on the genome. Sliding window approach?
+
 * Resources
 
 ** NGS mapping from Tutorial for learning Genomics.
@@ -32,9 +35,3 @@ Chat to find groups:
 
 Project and student list:
 [[https://docs.google.com/document/d/1nLNA5moYD3z_DvdHuh5t_v5nju3Gx5ferpy24_2UbcI/edit]]
-
-
-* visualizations
-Maybe add a plot showing coverage for regions on the genome. Sliding window approach?
-
-
