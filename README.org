@@ -4,11 +4,10 @@
 
 Link to GitHub repository: https://github.com/pwolper/read-mapping
 
-* Tasks to-do
-- [ ] write/read results from respective folder (using os package?)
-- [ ] Make code more efficeint. Potentially parallelization?
+* Tasks to-do [2/3]
+- [X] write/read results from respective folder (using os package?)
 - [ ] Better visualizations. Read coverage with sliding window? How will this work efficiently?
-- [ ] Fix file naming and fix writing the data to a file. the csv file seems to be bugged a bit. Sorry if I shot it.
+- [X] Fix file naming and fix writing the data to a file. the csv file seems to be bugged a bit. Sorry if I shot it.
 
 
 * Description
@@ -33,24 +32,6 @@ Chat to find groups:
 Project and student list:
 [[https://docs.google.com/document/d/1nLNA5moYD3z_DvdHuh5t_v5nju3Gx5ferpy24_2UbcI/edit]]
 
-* def compStrand()
-New complmentary sequence function:
-#+begin_src python
-
-def complementary_sequence(s):
-    s_comp = str()
-    nucl = {"A": "T", "C": "G", "T": "A", "G": "C"}
-    for position,base in enumerate(s):
-        if base not in nucl:
-            return "Not a valid DNA sequence!"
-        else:
-            s_comp += nucl[base]
-    return s_comp
-
-#+end_src
-
-* Writing data to output folder.
-How to open() filename in new folder.
 
 * visualizations
 Maybe add a plot showing coverage for regions on the genome. Sliding window approach?
