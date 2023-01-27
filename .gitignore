@@ -1,2 +1,6 @@
 #exclude pycache
 __pycache__/
+
+#exclude output files
+*.csv
+*.png

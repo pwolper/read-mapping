@@ -35,7 +35,7 @@ def compStrand(sequences):                                    #returns the compl
         comp_s = str()
         for position,base in enumerate(s):
             if base not in nucl:
-                return "Not a valid DNA sequence!"
+                print("Not a valid DNA sequence! Check position",position,"!")
             else:
                 comp_s += nucl[base]
         comp_sequences.append(comp_s[::-1])
@@ -88,9 +88,11 @@ def mapGenome(genomes, Reads):                                      #return dict
 
     mapped = {}                                                     #create dictionary for output
     genome = str(genomes[0])
+    comp_genome = str(compStrand(genomes[0]))
+
     for read in Reads:
           posFor = [i.start() for i in re.finditer(read, genome)]
-          posRev = [i.start() for i in re.finditer(read, compStrand(genome))]
+          posRev = [i.start() for i in re.finditer(read, comp_genome)]
           posOut = [posFor, posRev]
           mapped[read] = posOut
 

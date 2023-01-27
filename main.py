@@ -10,8 +10,11 @@ path = "./output"
 genome = getGenome("data/Ecoli_genome.fasta")
 Reads = getReads("data/reads_new.fasta")
 
-mapped = mapGenome(genome,Reads)                             #mapping reads
 
+# for read in Reads:
+#     print([i for i in re.finditer(read,str(compStrand(genome[0])))])
+
+mapped = mapGenome(genome,Reads)                             #mapping reads
 
 MapSummary(mapped, genome, path)
 Barplot(Reads,mapped, genome, path)
