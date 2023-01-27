@@ -21,6 +21,9 @@ _“Mapping” the reads from NGS data to the genome_
 * visualizations
 Maybe add a plot showing coverage for regions on the genome. Sliding window approach?
 
+** PieChart
+https://r-graph-gallery.com/pie-plot.html
+
 * Resources
 
 ** NGS mapping from Tutorial for learning Genomics.
