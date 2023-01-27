@@ -4,7 +4,7 @@
 
 Link to GitHub repository: https://github.com/pwolper/read-mapping
 
-* Tasks to-do [2/3]
+* Tasks to-do [2/4]
 - [X] write/read results from respective folder (using os package?)
 - [ ] fix complementary strand search.
 - [ ] Better visualizations. Read coverage with sliding window? How will this work efficiently?
