@@ -1,5 +1,40 @@
 # Visualisation of mapped sequencing reads
 
-```{R}
+```{R message=F}
 library(ggplot2)
+library(dplyr)
+library(purrr)
+
+if (!require(ape)) {
+  install.packages("ape")
+  library(ape)
+}
+
+```
+
+```{R}
+genome <- read.dna("data/Ecoli_genome.fasta",format="fasta")
+sequence <- as.character(genome)
+genome_length <- length(sequence)
+```
+
+## Importing data from csv
+```{R}
+mapped <- read.csv("output/2023-01-27_NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.csv",sep = ";")
+
+# mapped = mapped[50:60,]
+
+mapped = mapped %>% mutate_at(vars(Sense, Antisense), ~map(strsplit(. ,split=","), ~map_int(.x, as.integer)))
+mapped %>% str()
+
+sense = unlist(mapped$Sense)
+anti = unlist(mapped$Antisense)
+
+ggplot(data.frame(x = sense), aes(x)) +
+  geom_histogram(bins = 100,color="red",fill="white")
+
+ggplot(data.frame(x = anti), aes(x)) +
+  geom_histogram(bins = 100,color="blue",fill="white")
+# length(mapped$Sense[[7]])
+
 ```
