@@ -73,8 +73,8 @@ def MapSummary(mappedGenome, gotGenome, path = "./"):          #create a summary
         header = ["Read", "Sense", "Antisense", "Number of sense hits", "Number of antisense hits", "Number of total hits"]
         f.writerow(header)
         for read in mappedGenome:
-            sense = ",".join(str(x) for x in mappedGenome[read][0])
-            anti = ",".join(str(x) for x in mappedGenome[read][1])
+            sense = ", ".join(str(x) for x in mappedGenome[read][0])
+            anti = ", ".join(str(x) for x in mappedGenome[read][1])
             n_sense = len(mappedGenome[read][0])                     #write number of found positions
             n_anti = len(mappedGenome[read][1])
             n_total = n_sense + n_anti
