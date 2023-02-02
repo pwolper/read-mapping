@@ -7,7 +7,7 @@ Link to GitHub repository: https://github.com/pwolper/read-mapping
 * Tasks to-do [3/4]
 - [X] write/read results from respective folder (using os package?)
 - [X] fix complementary strand search.
-- [ ] Added two pie charts to R code. Maybe still one showing percentage of reads for each number of hits. Improve coloring
+- [ ] Added two pie charts to R code. Maybe still one missing showing percentage of reads for each number of hits. Improve coloring
 - [X] Fix file naming and fix writing the data to a file. the csv file seems to be bugged a bit. FIXED.
 
 
