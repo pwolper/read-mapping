@@ -37,6 +37,24 @@ anti %>% length()
 
 reads <- data.frame(pos = c(sense, anti), strand = as.factor(rep(c("s","a"),times = c(length(sense),length(anti)))))
 
+#pie charts
+pie1 <- data.frame(Group = c("Sense", "Anti-Sense"), amount = c(length(sense),length(anti)))
+pie1 <- pie1 %>%
+  arrange(desc(Group)) %>%
+  mutate(ypos = c(410, 905.5))
+
+i = 1
+pie2 <- data.frame("Group" =  c("No Hit", "Hit"), "value" = c(0,0))
+while (i < length(mapped[,1])){
+  i <- i+1
+  if ((mapped[i,4]== 0) & (mapped[i,5] == 0)){
+    pie2$value[1] <- pie2$value[1]+1
+  }
+  else{
+    pie2$value[2] <- pie2$value[2]+1
+  }
+}
+pie2$ypos <- c(pie2$value[1]/2, pie2$value[2]/2+pie2$value[1])
 ```
 
 ## Plotting mapped reads
@@ -64,3 +82,29 @@ ggplot(reads) +
   theme(text = element_text(size = 20)) 
 ```
 Description Fig x2: Sense vs. Antisense density of mapped reads. The y-axis shows a number of counts per 30 Kb segment. 
+
+```{R}
+ggplot(pie1, aes(x="", y=amount, fill=Group)) +
+  geom_bar(stat="identity", width=1, color = "black") +
+  coord_polar("y", start=0)+
+  theme_void()+
+  theme(legend.position="top") +
+  theme(legend.title= element_blank()) +
+  geom_text(aes(x = 1, y = ypos, label = amount), color = "white", size=5)+
+  scale_fill_manual(values= c("blue", "red"))+
+  labs(caption = "Fig 3: Number of successful mappings to sense and anti-sense strand.")
+```
+Description Fig x: Number of successful mappings to sense or anti-sense strand. 
+
+```{R}
+ggplot(pie2, aes(x="", y=value, fill=Group)) +
+  geom_bar(stat="identity", width=1, color = "black") +
+  coord_polar("y", start=0)+
+  theme_void()+
+  theme(legend.position="top") +
+  theme(legend.title= element_blank()) +
+  geom_text(aes(x = 1, y = ypos, label = value), color = "white", size=5)+
+  scale_fill_manual(values= c("blue", "red"))+
+labs(caption = "Fig 4: Number of reads that could be mapped to the gnome vs. number of reads that could not be mapped.")
+```
+Description Fig x: Number of reads that could be mapped to the gnome vs. number of reads that could not be mapped.
