@@ -1,16 +1,24 @@
 # Visualisation of mapped sequencing reads
 
 ```{R message=F}
+
 library(ggplot2)
 library(dplyr)
 library(purrr)
-
+library(ggrepel)
+library(tidyverse)
 if (!require(ape)) {
   install.packages("ape")
   library(ape)
 }
-
-
+if (!require(ggrepel)) {
+  install.packages("ggrepel")
+  library(ggrepel)
+}
+if (!require(tidyverse)) {
+  install.packages("tidyverse")
+  library(tidyverse)
+}
 ```
 
 ```{R}
@@ -38,23 +46,55 @@ anti %>% length()
 reads <- data.frame(pos = c(sense, anti), strand = as.factor(rep(c("s","a"),times = c(length(sense),length(anti)))))
 
 #pie charts
+
+  #Hits Sense vs Antisense 
 pie1 <- data.frame(Group = c("Sense", "Anti-Sense"), amount = c(length(sense),length(anti)))
 pie1 <- pie1 %>%
   arrange(desc(Group)) %>%
-  mutate(ypos = c(410, 905.5))
-
+  mutate(ypos = c(pie1$amount[1]/2, pie1$amount[2]/2+pie1$amount[1]))
+  
+  #Hits vs No Hits
 i = 1
-pie2 <- data.frame("Group" =  c("No Hit", "Hit"), "value" = c(0,0))
+pie1$Group2 <- c("No Hit", "Hit")
 while (i < length(mapped[,1])){
   i <- i+1
   if ((mapped[i,4]== 0) & (mapped[i,5] == 0)){
-    pie2$value[1] <- pie2$value[1]+1
+    pie1$value[1] <- pie2$value[1]+1
   }
   else{
-    pie2$value[2] <- pie2$value[2]+1
+    pie1$value[2] <- pie2$value[2]+1
   }
 }
-pie2$ypos <- c(pie2$value[1]/2, pie2$value[2]/2+pie2$value[1])
+pie1$ypos2 <- c(pie1$value[1]/2, pie1$value[2]/2+pie1$value[1])
+
+  #Succesful mapped Reads Sense vs Antisense
+
+pie1$Group3 = c("Sense", "Anti-Sense")
+pie1$Reads = c(sum(mapped[,4] != 0),sum(mapped[,5] != 0))
+pie1$ypos3 <- c(pie1$Reads[1]/2, pie1$Reads[2]/2+pie1$Reads[1])
+  
+
+  #Map amount
+
+MapNum <- data.frame("Mappings" = 0, "Hits" = 0)
+
+
+for(i in (1:length(mapped[,6]))){
+    if (mapped[i,6] %in% MapNum[,1]){
+      pos = which(MapNum[,1] == mapped[i,6])
+      MapNum[pos,2] <- (MapNum[pos,2]+1)
+      } else{
+      newline <- c(mapped[i,6],1)
+      MapNum <- rbind(MapNum, newline)
+      }
+}
+MapNum$Fraction <- MapNum[,2]/sum(MapNum[,2])*100
+MapNum <- MapNum %>% 
+  mutate(csum = rev(cumsum(rev(Hits))), 
+         pos = Hits/2 + lead(csum, 1),
+         pos = if_else(is.na(pos), Hits/2, pos))
+
+
 ```
 
 ## Plotting mapped reads
@@ -95,16 +135,58 @@ ggplot(pie1, aes(x="", y=amount, fill=Group)) +
   labs(caption = "Fig 3: Number of successful mappings to sense and anti-sense strand.")
 ```
 Description Fig x: Number of successful mappings to sense or anti-sense strand. 
-
 ```{R}
-ggplot(pie2, aes(x="", y=value, fill=Group)) +
+ggplot(pie1, aes(x="", y=Reads, fill=Group3)) +
   geom_bar(stat="identity", width=1, color = "black") +
   coord_polar("y", start=0)+
   theme_void()+
   theme(legend.position="top") +
   theme(legend.title= element_blank()) +
-  geom_text(aes(x = 1, y = ypos, label = value), color = "white", size=5)+
+  geom_text(aes(x = 1, y = ypos3, label = Reads), color = "white", size=5)+
   scale_fill_manual(values= c("blue", "red"))+
-labs(caption = "Fig 4: Number of reads that could be mapped to the gnome vs. number of reads that could not be mapped.")
+  labs(caption = "Fig 4: Successful mapped Reads Sense vs Antisense.")
+```
+Description Fig x: Succesful mapped Reads Sense vs Antisense
+```{R}
+ggplot(pie1, aes(x="", y=value, fill=Group2)) +
+  geom_bar(stat="identity", width=1, color = "black") +
+  coord_polar("y", start=0)+
+  theme_void()+
+  theme(legend.position="top") +
+  theme(legend.title= element_blank()) +
+  geom_text(aes(x = 1, y = ypos2, label = value), color = "white", size=5)+
+  #scale_fill_manual(values= c("blue", "red"))+
+  scale_fill_brewer(palette="Pastel1")+
+labs(caption = "Fig 5: Number of reads that could be mapped to the gnome vs. number of reads that could not be mapped.")
 ```
 Description Fig x: Number of reads that could be mapped to the gnome vs. number of reads that could not be mapped.
+```{R}
+
+ggplot(MapNum, aes(x="", y=Hits, fill=factor(Mappings))) +
+  geom_bar(stat="identity", width=1, color = "black") +
+  coord_polar("y", start=0)+
+  theme_void()+
+  theme(legend.position="top") +
+  theme(legend.title= element_blank()) +
+  scale_fill_brewer(palette="Pastel1")+
+  geom_label_repel(data = df2,
+                   aes(y = pos, label = paste0(Fraction, "%")),
+                   size = 4.5, nudge_x = 1, show.legend = FALSE) +
+labs(caption = "Fig 6: Fraction of Reads by Number of Hits.")
+
+```
+```{R}
+
+ggplot(MapNum, aes(x="", y=Hits, fill=factor(Mappings))) +
+  geom_bar(stat="identity", width=1, color = "black") +
+  coord_polar("y", start=0)+
+  theme_void()+
+  theme(legend.position="top") +
+  theme(legend.title= element_blank()) +
+  scale_fill_brewer(palette="Pastel1")+
+  geom_label_repel(data = df2,
+                   aes(y = pos, label = paste0(Fraction, "%")),
+                   size = 4.5, nudge_x = 1, show.legend = FALSE) +
+labs(caption = "Fig 5: Fraction of Reads by Number of Hits.")
+
+```
