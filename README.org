@@ -23,7 +23,7 @@ _“Mapping” the reads from NGS data to the genome_
 ** Genome sequencing data
 insert bash code.
 
-#+CODE:
+#+NAME:
 #+begin_src shell :results code
 ls -l data
 #+end_src
