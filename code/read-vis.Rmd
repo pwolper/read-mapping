@@ -107,8 +107,8 @@ p2 <- ggplot(reads) +
   labs(x = "Genome Position in Mb", y = "reads mapped per 30 Kb segment", caption = "Fig 2: Orientation of mapped Reads") +
   theme_classic() 
 
-ggsave("F1_Genome_pos_total.tiff",p1, device = "tiff", dpi = 300, path = output)
-ggsave("F2_Genome_pos_orient.tiff",p2, device = "tiff", dpi = 300, path = output) 
+ggsave("F1_Genome_pos_total.png",p1, device = "png", dpi = 300, path = output)
+ggsave("F2_Genome_pos_orient.png",p2, device = "png", dpi = 300, path = output) 
 ```
 ```{R fig_width = 100}
 p1
@@ -154,8 +154,8 @@ p5 <- ggplot(MapNum, aes(x="", y=Hits, fill=factor(Mappings))) +
                    size = 5, nudge_x = 0.5, show.legend = FALSE) +
 labs(caption = "Fig 5")
 
-ggsave("F3_Hits_sense_vs_antisense.tiff",p3 ,device = "tiff", dpi = 300, path = output)
-ggsave("F4_Read_distribution.tiff",p4, dpi = 300, path = output)
+ggsave("F3_Hits_sense_vs_antisense.png",p3 ,device = "png", dpi = 300, path = output)
+ggsave("F4_Read_distribution.png",p4, device = "png", dpi = 300, path = output)
 ggsave("F5_Reads_by_number_of_hits.png",p5 ,device = "png", dpi = 300, path = output)
 
 ```
