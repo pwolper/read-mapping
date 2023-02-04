@@ -3,6 +3,5 @@ __pycache__/
 
 #exclude output files
 *.csv
-*.png
 
 *.here
