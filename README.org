@@ -27,7 +27,6 @@ insert bash code.
 ls -l
 #+end_src
 
-#+RESULTS:
 #+begin_src shell
 total 16
 drwxrwxr-x 2 philip philip 4096 Feb  4 14:12 code
