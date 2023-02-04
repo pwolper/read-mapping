@@ -37,7 +37,7 @@ drwxrwxr-x 3 philip philip 4096 Feb  4 14:11 output
 #+end_src
 
 ** Genome sequencing data
-The genome data is required as /.fasta/ file format, and is found in the \/data/ folder. Parsing of this happens in mapping.py.
+The genome data is required as /.fasta/ file format, and is found in the \//data/ folder. Parsing of this happens in mapping.py.
 
 #+begin_src shell :results code
 head data/Ecoli_genome.fasta
