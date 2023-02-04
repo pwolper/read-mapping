@@ -89,7 +89,7 @@ insert Excel screenshot
 
 #+html: <p align="center"><img src="output/img/F1_Genome_pos_total.tiff" /></p>
 
-[[file:output/img/F2_Genome_pos_orient.tiff]]
+[[file:output/img/F5_Reads_by_number_of_hits.png]]
 
 * Resources
 
