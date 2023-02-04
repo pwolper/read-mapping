@@ -30,7 +30,7 @@ output <- "C:/Users/nikla/Desktop/readmap_fin/read-mapping/output"
 
 ## Importing data from /output/*.csv
 Import and formatting fo data to be used for vizualisation!
-```{R}
+```{R eval=FALSE}
 mapped <- read.csv("output/2023-01-27_NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.csv",sep = ";")
 
 # mapped = mapped[50:60,]
@@ -106,10 +106,12 @@ ggplot(reads, aes(x = pos, y = ..density..)) +
   geom_density(color = "darkgreen", lwd=1.3, bw = 70000)+
                  # geom_histogram(reads)
   labs(x = "Genome Position in Mb", y = "Density of reads mapped", caption = "Fig. 1: Density of the reads mapped to the E.coli genome.") +
-  # scale_y_reverse(limits = c(0,12)) + 
   theme_classic() +
   theme(text = element_text(size = 20)) 
 ggsave("F1_Genome_pos_total.tiff", device = "tiff", dpi = 300, path = output)
+=======
+  theme_classic()
+  # theme(text = element_text(size = 20)) 
 ```
 Description Fig x: Density of reads mapped to the E.coli genome. Each bin size represents a 30 kb long segment along the genome.
 
@@ -121,35 +123,28 @@ ggplot(reads) +
   scale_y_continuous(labels = abs) + 
   labs(x = "Genome Position in Mb", y = "reads mapped per 30 Kb segment", caption = "Fig 2: Orientation of mapped Reads") +
   theme_classic() +
-  theme(text = element_text(size = 20)) 
- ggsave("F2_Genome_pos_orient.tiff", device = "tiff", dpi = 300, path = output)
+ ggsave("F2_Genome_pos_orient.tiff", device = "tiff", dpi = 300, path = output) 
+  # theme(text = element_text(size = 20)) 
 ```
 Description Fig x2: Sense vs. Antisense density of mapped reads. The y-axis shows a number of counts per 30 Kb segment. 
 
+ggplot(pie2, aes(x="", y=value, fill=Group)) +
+  geom_bar(stat="identity", width=1) +
 ```{R}
 ggplot(pie1, aes(x="", y=amount, fill=Group)) +
-  geom_bar(stat="identity", width=1, color = "black") +
+  geom_bar(stat="identity", width=1) +
   coord_polar("y", start=0)+
   theme_void()+
   theme(legend.position="top") +
   theme(legend.title= element_blank()) +
   geom_text(aes(x = 1, y = ypos, label = amount), color = "white", size=5)+
-  scale_fill_manual(values= c("blue", "red"))+
-  labs(caption = "Fig 3: Number of successful mappings to sense and anti-sense strand.")
+  scale_fill_manual(values= c("red","blue"))+
+  ## scale_fill_brewer(palette="Pastel1")+
+  labs(caption = "Fig 3: Number of successful mappings to sense and anti-sense strand.") +
  ggsave("F3_Hits_sense_vs_antisense.tiff", device = "tiff", dpi = 300, path = output)
 ```
 Description Fig x: Number of successful hits to sense or anti-sense strand.
 ```{R}
-ggplot(pie1, aes(x="", y=Reads, fill=Group3)) +
-  geom_bar(stat="identity", width=1, color = "black") +
-  coord_polar("y", start=0)+
-  theme_void()+
-  theme(legend.position="top") +
-  theme(legend.title= element_blank()) +
-  geom_text(aes(x = 1, y = ypos3, label = Reads), color = "white", size=5)+
-  scale_fill_manual(values= c("blue", "red"))+
-  labs(caption = "Fig 4: Successfully mapped Reads to sense or antisense strand.")
-  ggsave("F4_Reads_sense_vs_antisense.tiff", device = "tiff", dpi = 300, path = output)
 ```
 Description Fig x: Successfully mapped Reads to sense or antisense strand.
 ```{R}
@@ -160,12 +155,11 @@ ggplot(pie1, aes(x="", y=value, fill=Group2)) +
   theme(legend.position="top") +
   theme(legend.title= element_blank()) +
   geom_text(aes(x = 1, y = ypos2, label = value), color = "white", size=5)+
-  #scale_fill_manual(values= c("blue", "red"))+
-  scale_fill_brewer(palette="Pastel1")+
-labs(caption = "Fig 5: Number of reads that could be mapped to the genome vs. number of reads that could not be mapped.")
-ggsave("F5_Reads_mapped_vs_not_mapped.tiff", device = "tiff", dpi = 300, path = output)
+  scale_fill_manual(values= c("green2","black"))+
+labs(caption = "Fig 4: Number of reads that could be mapped to the genome vs. number of reads that could not be mapped.")
 ```
-Description Fig x: Number of reads that could be mapped to the gnome vs. number of reads that could not be mapped.
+
+Description Fig x: Number of reads that could be mapped to the genome vs. number of reads that could not be mapped.
 ```{R}
 
 ggplot(MapNum, aes(x="", y=Hits, fill=factor(Mappings))) +
