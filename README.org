@@ -87,14 +87,6 @@ insert Excel screenshot
 #+attr_org: :width 800
 [[./output/img/F5_Reads_by_number_of_hits.png]]
 
-[[./output/img/F1_Genome_pos_total.tiff]]
-
-#+BEGIN_html
-<p align="center"><img src="output/img/F5_Reads_by_number_of_hits.png" /></p>
-#+END_html
-[[output/img/F5_Reads_by_number_of_hits.png]]
-
-
 * Resources
 
 ** NGS mapping from Tutorial for learning Genomics.
