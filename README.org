@@ -86,7 +86,7 @@ insert Excel screenshot
 ** Visulisation with R and ggplot2
 
 #+attr_org: :width 800
-[[./output/img/F5_Reads_by_number_of_hits.tiff]]
+[[./output/img/F5_Reads_by_number_of_hits.png]]
 
 * Resources
 
