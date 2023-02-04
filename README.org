@@ -31,11 +31,6 @@ drwxrwxr-x 3 philip philip 4096 Feb  4 14:11 output
 
 * Data
 
-#+begin_src shell
--rw-rw-r-- 1 philip philip 4699745 Jan 27 15:37 Ecoli_genome.fasta
--rw-rw-r-- 1 philip philip   35890 Jan 18 09:02 reads_new.fasta
-#+end_src
-
 ** Genome sequencing data
 The genome data is required as /.fasta/ file format, and is found in the /data/ folder. Parsing of this happens in mapping.py.
 
@@ -66,18 +61,7 @@ CACGCATATCTATCGTAATGGTGGGGAGCA
 >4
 CAATCCAGTTAGCATGGTAATAAAGAACAC
 #+end_src
-The supplied reads file consits of 1000 short sequencing reads of
-
-#+begin_src shell :results code
-head -n 2 data/reads_new.fasta
-#+end_src
-
-#+RESULTS:
-#+begin_src shell
->0
-GCGCTGGCTGACGCGGAATTACGGCGCAAG
-#+end_src
-
+The supplied reads file consits of 1000 short sequencing reads of 30 nucleotides each.
 
 * How does the code work?
 Write a decription of the code here...
@@ -101,7 +85,9 @@ insert Excel screenshot
 
 ** Visulisation with R and ggplot2
 
-insert tiff images to README.
+[[file:output/img/F1_Genome_pos_total.tiff]]
+
+[[file:output/img/F2_Genome_pos_orient.tiff]]
 
 * Resources
 
