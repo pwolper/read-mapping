@@ -86,9 +86,6 @@ insert Excel screenshot
 ** Visulisation with R and ggplot2
 
 #+attr_org: :width 400
-[[./output/img/F4_Read_distribution.png]]
-
-#+attr_org: :width 400
 [[./output/img/F1_Genome_pos_total.png]]
 
 #+attr_org: :width 400
