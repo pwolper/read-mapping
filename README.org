@@ -39,11 +39,9 @@ drwxrwxr-x 3 philip philip 4096 Feb  4 14:11 output
 ** Genome sequencing data
 The genome data is required as /.fasta/ file format, and is found in the /data/ folder. Parsing of this happens in mapping.py.
 
-#+begin_src shell :results code
-head data/Ecoli_genome.fasta
-#+end_src
-
 #+begin_src shell
+$ head data/Ecoli_genome.fasta
+
 >NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome
 AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGCTTCTGAACTGGTTACCTGCCGTGAGTAAATTAAAATTTTATTGACTTAGGTCACTAAATACTTTAACCAATATAGGCATAGCGCACAGAC
 AGATAAAAATTACAGAGTACACAACATCCATGAAACGCATTAGCACCACCATTACCACCACCATCACCATTACCACAGGTAACGGTGCGGGCTGACGCGTACAGGAAACACAGAAAAAAGCCCGCACCTGACAGTGCGGGCTTTTTTTTTCGACCAAAGG
@@ -52,9 +50,34 @@ GCGATGATTGAAAAAACCATTAGCGGCCAGGATGCTTTACCCAATATCAGCGATGCCGAACGTATTTTTGCCGAACTTTT
 AACATGTCCTGCATGGCATTAGTTTGTTGGGGCAGTGCCCGGATAGCATCAACGCTGCGCTGATTTGCCGTGGCGAGAAA
 #+end_src
 
-
 ** Short sequencing reads
-insert bash code
+
+#+begin_src shell
+$ head data/reads_new.fasta
+
+>0
+GCGCTGGCTGACGCGGAATTACGGCGCAAG
+>1
+CATTCGTACCAGTAGCTGTAGCCCGGCTGA
+>2
+CAATATCTTTATACGCCATCGGGATTTCGT
+>3
+CACGCATATCTATCGTAATGGTGGGGAGCA
+>4
+CAATCCAGTTAGCATGGTAATAAAGAACAC
+#+end_src
+The supplied reads file consits of 1000 short sequencing reads of
+
+#+begin_src shell :results code
+head -n 2 data/reads_new.fasta
+#+end_src
+
+#+RESULTS:
+#+begin_src shell
+>0
+GCGCTGGCTGACGCGGAATTACGGCGCAAG
+#+end_src
+
 
 * How does the code work?
 Write a decription of the code here...
