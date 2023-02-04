@@ -6,7 +6,7 @@ Link to GitHub repository: https://github.com/pwolper/read-mapping
 
 ***** Tasks to-do [0/3]
 - [-] Added two pie charts to R code. Maybe still one missing showing percentage of reads for each number of hits. Improve coloring
-- [ ] Clean up Rmd output of the results. Arrange charts with each other (ggarrange?)
+- [ ] Clean up Rmd output of the results. Arrange charts with each other (ggarrange? Can we run the render process from python script?
 - [ ] Write description of the project in the README. Maybe present using github website.
 
 * Heading + Project Infos
