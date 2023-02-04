@@ -23,17 +23,20 @@ _“Mapping” the reads from NGS data to the genome_
 ** Genome sequencing data
 insert bash code.
 
+#+CODE:
 #+begin_src shell :results code
-ls -l
+ls -l data
 #+end_src
 
 #+begin_src shell
-total 16
-drwxrwxr-x 2 philip philip 4096 Feb  4 14:12 code
-drwxrwxr-x 2 philip philip 4096 Jan 18 09:03 data
-drwxrwxr-x 3 philip philip 4096 Feb  4 14:11 output
--rw-rw-r-- 1 philip philip 2835 Feb  4 14:45 README.org
+total 4628
+-rw-rw-r-- 1 philip philip 4699745 Jan 27 15:37 Ecoli_genome.fasta
+-rw-rw-r-- 1 philip philip   35890 Jan 18 09:02 reads_new.fasta
 #+end_src
+
+#+RESULTS:
+
+Results in:
 
 ** Short sequencing reads
 insert bash code
