@@ -85,8 +85,16 @@ insert Excel screenshot
 
 ** Visulisation with R and ggplot2
 
-#+attr_org: :width 800
-[[./output/img/F5_Reads_by_number_of_hits.png]]
+#+attr_org: :width 400
+[[./output/img/F4_Read_distribution.png]]
+
+#+attr_org: :width 400
+[[./output/img/F1_Genome_pos_total.png]]
+
+#+attr_org: :width 400
+[[./output/img/F2_Genome_pos_orient.png]]
+
+
 
 * Resources
 
