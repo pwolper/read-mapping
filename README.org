@@ -4,8 +4,9 @@
 
 Link to GitHub repository: https://github.com/pwolper/read-mapping
 
-***** Tasks to-do [0/3]
+***** Tasks to-do [0/4]
 - [-] Added two pie charts to R code. Maybe still one missing showing percentage of reads for each number of hits. Improve coloring
+- [ ] Fix the file path pointer accross the code.
 - [ ] Clean up Rmd output of the results. Arrange charts with each other (ggarrange? Can we run the render process from python script?
 - [ ] Write description of the project in the README. Maybe present using github website.
 
@@ -18,7 +19,16 @@ _“Mapping” the reads from NGS data to the genome_
 - Please also keep in mind that DNA is double-stranded. In Fasta file of the genome you have only one strand reported, though the read can be mapped onto any of the strand. So please check both strands.
 - Please provide the infographics showing how many reads have been mapped to the genome, how many have been mapped several times (how many times exactly?), how many haven’t been mapped.
 
-* The Code
+* Data
+** Genome sequencing data
+insert bash code.
+
+** Short sequencing reads
+insert bash code
+
+* How does the code work?
+Write a decription of the code here...
+
 ** mapping.py
 ...
 Source code blocks like this:
@@ -32,10 +42,13 @@ for x in range(1,10):
 
 #+end_src
 
+* Mapping output and Statistics
+** python returns a .csv file
+insert Excel screenshot
 
-* Screenshots
+** Visulisation with R and ggplot2
 
-How to add screenshots to github page.
+insert tiff images to README.
 
 * Resources
 
