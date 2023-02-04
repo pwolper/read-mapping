@@ -23,16 +23,18 @@ _“Mapping” the reads from NGS data to the genome_
 ** Genome sequencing data
 insert bash code.
 
-#+begin_src shell
+#+begin_src shell :results html
 ls -l
 #+end_src
 
 #+RESULTS:
-| total      | 16 |        |        |      |     |    |       |            |
-| drwxrwxr-x |  2 | philip | philip | 4096 | Feb |  4 | 14:12 | code       |
-| drwxrwxr-x |  2 | philip | philip | 4096 | Jan | 18 | 09:03 | data       |
-| drwxrwxr-x |  3 | philip | philip | 4096 | Feb |  4 | 14:11 | output     |
-| -rw-rw-r-- |  1 | philip | philip | 2436 | Feb |  4 | 14:35 | README.org |
+#+begin_export html
+total 16
+drwxrwxr-x 2 philip philip 4096 Feb  4 14:12 code
+drwxrwxr-x 2 philip philip 4096 Jan 18 09:03 data
+drwxrwxr-x 3 philip philip 4096 Feb  4 14:11 output
+-rw-rw-r-- 1 philip philip 2485 Feb  4 14:43 README.org
+#+end_export
 
 ** Short sequencing reads
 insert bash code
