@@ -156,7 +156,7 @@ labs(caption = "Fig 5")
 
 ggsave("F3_Hits_sense_vs_antisense.tiff",p3 ,device = "tiff", dpi = 300, path = output)
 ggsave("F4_Read_distribution.tiff",p4, dpi = 300, path = output)
-ggsave("F5_Reads_by_number_of_hits.tiff",p5 ,device = "tiff", dpi = 300, path = output)
+ggsave("F5_Reads_by_number_of_hits.png",p5 ,device = "png", dpi = 300, path = output)
 
 ```
 ```{R fig_width = 50}
