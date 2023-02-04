@@ -4,12 +4,12 @@
 
 Link to GitHub repository: https://github.com/pwolper/read-mapping
 
-* Tasks to-do [3/4]
-- [X] write/read results from respective folder (using os package?)
-- [X] fix complementary strand search.
-- [ ] Added two pie charts to R code. Maybe still one missing showing percentage of reads for each number of hits. Improve coloring
-- [X] Fix file naming and fix writing the data to a file. the csv file seems to be bugged a bit. FIXED.
+***** Tasks to-do [0/3]
+- [-] Added two pie charts to R code. Maybe still one missing showing percentage of reads for each number of hits. Improve coloring
+- [ ] Clean up Rmd output of the results. Arrange charts with each other (ggarrange?)
+- [ ] Write description of the project in the README. Maybe present using github website.
 
+* Heading + Project Infos
 
 * Description
 _“Mapping” the reads from NGS data to the genome_
@@ -18,16 +18,32 @@ _“Mapping” the reads from NGS data to the genome_
 - Please also keep in mind that DNA is double-stranded. In Fasta file of the genome you have only one strand reported, though the read can be mapped onto any of the strand. So please check both strands.
 - Please provide the infographics showing how many reads have been mapped to the genome, how many have been mapped several times (how many times exactly?), how many haven’t been mapped.
 
-* visualizations
-Maybe add a plot showing coverage for regions on the genome. Sliding window approach?
+* The Code
+** mapping.py
+...
+Source code blocks like this:
 
-** PieChart
-https://r-graph-gallery.com/pie-plot.html
+#+begin_src python
+example = list()
+
+for x in range(1,10):
+    y = 3*x
+    return("Return hello world!")
+
+#+end_src
+
+
+* Screenshots
+
+How to add screenshots to github page.
 
 * Resources
 
 ** NGS mapping from Tutorial for learning Genomics.
 [[https://genomics.sschmeier.com/ngs-mapping/]]
+
+** PieChart
+https://r-graph-gallery.com/pie-plot.html
 
 ** Groups
 Book feedback session:
