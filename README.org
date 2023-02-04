@@ -10,8 +10,6 @@ Link to GitHub repository: https://github.com/pwolper/read-mapping
 - [ ] Clean up Rmd output of the results. Arrange charts with each other (ggarrange? Can we run the render process from python script?
 - [ ] Write description of the project in the README. Maybe present using github website.
 
-* Heading + Project Infos
-
 * Description
 _“Mapping” the reads from NGS data to the genome_
 
@@ -19,24 +17,41 @@ _“Mapping” the reads from NGS data to the genome_
 - Please also keep in mind that DNA is double-stranded. In Fasta file of the genome you have only one strand reported, though the read can be mapped onto any of the strand. So please check both strands.
 - Please provide the infographics showing how many reads have been mapped to the genome, how many have been mapped several times (how many times exactly?), how many haven’t been mapped.
 
-* Data
-** Genome sequencing data
-insert bash code.
+* Heading + Project Infos
+_Project directory structure_
+#+begin_src shell
+$ ls -l
 
-#+NAME:
-#+begin_src shell :results code
-ls -l data
+total 16
+drwxrwxr-x 2 philip philip 4096 Feb  4 14:12 code
+drwxrwxr-x 2 philip philip 4096 Jan 18 09:03 data
+drwxrwxr-x 3 philip philip 4096 Feb  4 14:11 output
+-rw-rw-r-- 1 philip philip 2882 Feb  4 14:59 README.org
 #+end_src
 
+* Data
+
 #+begin_src shell
-total 4628
 -rw-rw-r-- 1 philip philip 4699745 Jan 27 15:37 Ecoli_genome.fasta
 -rw-rw-r-- 1 philip philip   35890 Jan 18 09:02 reads_new.fasta
 #+end_src
 
-#+RESULTS:
+** Genome sequencing data
+The genome data is required as /.fasta/ file format, and is found in the //data/ folder. Parsing of this happens in mapping.py.
 
-Results in:
+#+begin_src shell :results code
+head data/Ecoli_genome.fasta
+#+end_src
+
+#+begin_src shell
+>NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome
+AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGCTTCTGAACTGGTTACCTGCCGTGAGTAAATTAAAATTTTATTGACTTAGGTCACTAAATACTTTAACCAATATAGGCATAGCGCACAGAC
+AGATAAAAATTACAGAGTACACAACATCCATGAAACGCATTAGCACCACCATTACCACCACCATCACCATTACCACAGGTAACGGTGCGGGCTGACGCGTACAGGAAACACAGAAAAAAGCCCGCACCTGACAGTGCGGGCTTTTTTTTTCGACCAAAGG
+TAACGAGGTAACAACCATGCGAGTGTTGAAGTTCGGCGGTACATCAGTGGCAAATGCAGAACGTTTTCTGCGTGTTGCCGATATTCTGGAAAGCAATGCCAGGCAGGGGCAGGTGGCCACCGTCCTCTCTGCCCCCGCCAAAATCACCAACCACCTGGTG
+GCGATGATTGAAAAAACCATTAGCGGCCAGGATGCTTTACCCAATATCAGCGATGCCGAACGTATTTTTGCCGAACTTTTGACGGGACTCGCCGCCGCCCAGCCGGGGTTCCCGCTGGCGCAATTGAAAACTTTCGTCGATCAGGAATTTGCCCAAATAA
+AACATGTCCTGCATGGCATTAGTTTGTTGGGGCAGTGCCCGGATAGCATCAACGCTGCGCTGATTTGCCGTGGCGAGAAA
+#+end_src
+
 
 ** Short sequencing reads
 insert bash code
