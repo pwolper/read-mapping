@@ -87,6 +87,8 @@ insert Excel screenshot
 #+ATTR_HTML: :style margin-left: auto; margin-right: auto;
 [[./output/img/F1_Genome_pos_total.tiff]]
 
+#+html: <p align="center"><img src="output/img/F1_Genome_pos_total.tiff" /></p>
+
 [[file:output/img/F2_Genome_pos_orient.tiff]]
 
 * Resources
