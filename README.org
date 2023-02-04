@@ -84,7 +84,7 @@ for x in range(1,10):
 insert Excel screenshot
 
 ** Visulisation with R and ggplot2
-
+#+ATTR_HTML: :style margin-left: auto; margin-right: auto;
 [[file:output/img/F1_Genome_pos_total.tiff]]
 
 [[file:output/img/F2_Genome_pos_orient.tiff]]
