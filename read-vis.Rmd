@@ -25,6 +25,7 @@ if (!require(tidyverse)) {
 genome <- read.dna("data/Ecoli_genome.fasta",format="fasta")
 sequence <- as.character(genome)
 genome_length <- length(sequence)
+output <- "C:/Users/nikla/Desktop/readmap_fin/read-mapping/output"
 ```
 
 ## Importing data from /output/*.csv
@@ -45,41 +46,41 @@ anti %>% length()
 
 reads <- data.frame(pos = c(sense, anti), strand = as.factor(rep(c("s","a"),times = c(length(sense),length(anti)))))
 
-#pie charts
+#pie chart data
 
-  #Hits Sense vs Antisense 
+  #Pie chart: Hits Sense vs. Antisense 
 pie1 <- data.frame(Group = c("Sense", "Anti-Sense"), amount = c(length(sense),length(anti)))
 pie1 <- pie1 %>%
   arrange(desc(Group)) %>%
-  mutate(ypos = c(pie1$amount[1]/2, pie1$amount[2]/2+pie1$amount[1]))
+  mutate(ypos = c(pie1$amount[1]/2, pie1$amount[2]/2+pie1$amount[1])) #Calculate positions for labeling Pie chart. 
   
-  #Hits vs No Hits
+  #Pie chart: Hits vs No Hits
 i = 1
 pie1$Group2 <- c("No Hit", "Hit")
-while (i < length(mapped[,1])){
+while (i < length(mapped[,1])){ #loop trough "mapped";count Hits or No Hits
   i <- i+1
   if ((mapped[i,4]== 0) & (mapped[i,5] == 0)){
-    pie1$value[1] <- pie2$value[1]+1
+    pie1$value[1] <- pie2$value[1]+1 # add no hit
   }
   else{
-    pie1$value[2] <- pie2$value[2]+1
+    pie1$value[2] <- pie2$value[2]+1 # add hit
   }
 }
-pie1$ypos2 <- c(pie1$value[1]/2, pie1$value[2]/2+pie1$value[1])
+pie1$ypos2 <- c(pie1$value[1]/2, pie1$value[2]/2+pie1$value[1]) #Calculate positions for labeling Pie chart. 
 
-  #Succesful mapped Reads Sense vs Antisense
+  #Pie chart: Successfully mapped Reads Sense vs Antisense
 
 pie1$Group3 = c("Sense", "Anti-Sense")
-pie1$Reads = c(sum(mapped[,4] != 0),sum(mapped[,5] != 0))
-pie1$ypos3 <- c(pie1$Reads[1]/2, pie1$Reads[2]/2+pie1$Reads[1])
+pie1$Reads = c(sum(mapped[,4] != 0),sum(mapped[,5] != 0)) #count reads that have sense and antisense hits, store seperatley
+pie1$ypos3 <- c(pie1$Reads[1]/2, pie1$Reads[2]/2+pie1$Reads[1]) #Calculate positions for labeling Pie chart. 
   
 
-  #Map amount
+  #Pie chart: Reads per Number of Hits
 
 MapNum <- data.frame("Mappings" = 0, "Hits" = 0)
 
 
-for(i in (1:length(mapped[,6]))){
+for(i in (1:length(mapped[,6]))){   #loop through "mapped" and check if number of total hits already in MapNum; if so add one to Hits; if not, add add number of toatal hits to new line.
     if (mapped[i,6] %in% MapNum[,1]){
       pos = which(MapNum[,1] == mapped[i,6])
       MapNum[pos,2] <- (MapNum[pos,2]+1)
@@ -88,8 +89,8 @@ for(i in (1:length(mapped[,6]))){
       MapNum <- rbind(MapNum, newline)
       }
 }
-MapNum$Fraction <- MapNum[,2]/sum(MapNum[,2])*100
-MapNum <- MapNum %>% 
+MapNum$Fraction <- MapNum[,2]/sum(MapNum[,2])*100    #Calculate percentage
+MapNum <- MapNum %>%                                 #Calculate positions for labeling Pie chart. 
   mutate(csum = rev(cumsum(rev(Hits))), 
          pos = Hits/2 + lead(csum, 1),
          pos = if_else(is.na(pos), Hits/2, pos))
@@ -108,6 +109,7 @@ ggplot(reads, aes(x = pos, y = ..density..)) +
   # scale_y_reverse(limits = c(0,12)) + 
   theme_classic() +
   theme(text = element_text(size = 20)) 
+ggsave("F1_Genome_pos_total.tiff", device = "tiff", dpi = 300, path = output)
 ```
 Description Fig x: Density of reads mapped to the E.coli genome. Each bin size represents a 30 kb long segment along the genome.
 
@@ -120,6 +122,7 @@ ggplot(reads) +
   labs(x = "Genome Position in Mb", y = "reads mapped per 30 Kb segment", caption = "Fig 2: Orientation of mapped Reads") +
   theme_classic() +
   theme(text = element_text(size = 20)) 
+ ggsave("F2_Genome_pos_orient.tiff", device = "tiff", dpi = 300, path = output)
 ```
 Description Fig x2: Sense vs. Antisense density of mapped reads. The y-axis shows a number of counts per 30 Kb segment. 
 
@@ -133,8 +136,9 @@ ggplot(pie1, aes(x="", y=amount, fill=Group)) +
   geom_text(aes(x = 1, y = ypos, label = amount), color = "white", size=5)+
   scale_fill_manual(values= c("blue", "red"))+
   labs(caption = "Fig 3: Number of successful mappings to sense and anti-sense strand.")
+ ggsave("F3_Hits_sense_vs_antisense.tiff", device = "tiff", dpi = 300, path = output)
 ```
-Description Fig x: Number of successful mappings to sense or anti-sense strand. 
+Description Fig x: Number of successful hits to sense or anti-sense strand.
 ```{R}
 ggplot(pie1, aes(x="", y=Reads, fill=Group3)) +
   geom_bar(stat="identity", width=1, color = "black") +
@@ -144,9 +148,10 @@ ggplot(pie1, aes(x="", y=Reads, fill=Group3)) +
   theme(legend.title= element_blank()) +
   geom_text(aes(x = 1, y = ypos3, label = Reads), color = "white", size=5)+
   scale_fill_manual(values= c("blue", "red"))+
-  labs(caption = "Fig 4: Successful mapped Reads Sense vs Antisense.")
+  labs(caption = "Fig 4: Successfully mapped Reads to sense or antisense strand.")
+  ggsave("F4_Reads_sense_vs_antisense.tiff", device = "tiff", dpi = 300, path = output)
 ```
-Description Fig x: Succesful mapped Reads Sense vs Antisense
+Description Fig x: Successfully mapped Reads to sense or antisense strand.
 ```{R}
 ggplot(pie1, aes(x="", y=value, fill=Group2)) +
   geom_bar(stat="identity", width=1, color = "black") +
@@ -157,7 +162,8 @@ ggplot(pie1, aes(x="", y=value, fill=Group2)) +
   geom_text(aes(x = 1, y = ypos2, label = value), color = "white", size=5)+
   #scale_fill_manual(values= c("blue", "red"))+
   scale_fill_brewer(palette="Pastel1")+
-labs(caption = "Fig 5: Number of reads that could be mapped to the gnome vs. number of reads that could not be mapped.")
+labs(caption = "Fig 5: Number of reads that could be mapped to the genome vs. number of reads that could not be mapped.")
+ggsave("F5_Reads_mapped_vs_not_mapped.tiff", device = "tiff", dpi = 300, path = output)
 ```
 Description Fig x: Number of reads that could be mapped to the gnome vs. number of reads that could not be mapped.
 ```{R}
@@ -173,20 +179,5 @@ ggplot(MapNum, aes(x="", y=Hits, fill=factor(Mappings))) +
                    aes(y = pos, label = paste0(Fraction, "%")),
                    size = 4.5, nudge_x = 1, show.legend = FALSE) +
 labs(caption = "Fig 6: Fraction of Reads by Number of Hits.")
-
-```
-```{R}
-
-ggplot(MapNum, aes(x="", y=Hits, fill=factor(Mappings))) +
-  geom_bar(stat="identity", width=1, color = "black") +
-  coord_polar("y", start=0)+
-  theme_void()+
-  theme(legend.position="top") +
-  theme(legend.title= element_blank()) +
-  scale_fill_brewer(palette="Pastel1")+
-  geom_label_repel(data = df2,
-                   aes(y = pos, label = paste0(Fraction, "%")),
-                   size = 4.5, nudge_x = 1, show.legend = FALSE) +
-labs(caption = "Fig 5: Fraction of Reads by Number of Hits.")
-
+ggsave("F6_Reads_by_number_of_hits.tiff", device = "tiff", dpi = 300, path = output)
 ```
