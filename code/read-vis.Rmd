@@ -181,13 +181,13 @@ p5 <- ggplot(MapNum, aes(x = factor(Mappings),y=Hits, fill=factor(Mappings))) +
   scale_fill_brewer(name="Frequency of read",palette="Greens")+
   geom_label_repel(data = MapNum,
                    aes(y = pos, label = paste0(Hits, " (",Fraction, "%)")),
-                   size = 5, nudge_y = 1, show.legend = FALSE) +
+                   size = 5, nudge_y = 3, show.legend = FALSE) +
 labs(x = "Number of hits per read", caption = "Fig 5")
 p5
 
 ggsave("F3_Hits_sense_vs_antisense.png",p3 ,device = "png", dpi = 300, path = output)
 ggsave("F4_Read_distribution.png",p4, device = "png", dpi = 300, path = output)
-ggsave("F5_Reads_by_number_of_hits.png",p5 ,device = "png", dpi = 300, path = output)
+ggsave("F5_Reads_by_number_of_hits.png",p5 ,device = "png", height = 10, width = 10, dpi = 300, path = output)
 
 p2p3 <- ggpubr::ggarrange(p2,p3,nrow = 1, widths = c(1,0.5), align = "h", common.legend = TRUE)
 p2p3
