@@ -284,7 +284,7 @@ Output of the MapSummary function:
 *Fig 2*: Strand orientation of the mapped reads to sense or antisense. The sense strand is shown in blue and the antisense strand in red. Each bin represents a genomic segment of appproximately 30 Kb in length.
 
 [[file:output/img/F5_Reads_by_number_of_hits.png]]
-*Figure 3: Frequency spectrum of hits per read. Most reads are only mapped once, while some occur at higher frequency, the highest frequency of read is 37x.
+*Figure 3*: Frequency spectrum of hits per read. Most reads are only mapped once, while some occur at higher frequency, the highest frequency of read is 37x.
 
 * Resources
 
