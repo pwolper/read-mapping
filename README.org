@@ -213,7 +213,7 @@ path = "./output"                                                               
 
 *** Console Ouput
 
-```shell
+```
 
 Currently: Sun Feb  5 01:19:34 2023
 NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome
