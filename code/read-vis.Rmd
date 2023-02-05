@@ -110,7 +110,7 @@ p2 <- ggplot(reads) +
 ggsave("F1_Genome_pos_total.png",p1, device = "png", dpi = 300, path = output)
 ggsave("F2_Genome_pos_orient.png",p2, device = "png", dpi = 300, path = output) 
 ```
-```{R fig_width = 100}
+```{R echo = FALSE,fig_width = 100}
 p1
 p2
 ```
@@ -121,7 +121,7 @@ Description Fig 2: Sense vs. Antisense density of mapped reads. The y-axis shows
 
 ```{R}
 p3 <- ggplot(pie1, aes(x="", y=amount, fill=Group)) +
-  geom_bar(stat="identity", width=1) +
+  geom_bar(stat="identity", width=1, color = "black") +
   coord_polar("y", start=0)+
   theme_void()+
   theme(legend.position="top") +
@@ -158,8 +158,13 @@ ggsave("F3_Hits_sense_vs_antisense.png",p3 ,device = "png", dpi = 300, path = ou
 ggsave("F4_Read_distribution.png",p4, device = "png", dpi = 300, path = output)
 ggsave("F5_Reads_by_number_of_hits.png",p5 ,device = "png", dpi = 300, path = output)
 
+p2p3 <- ggpubr::ggarrange(p2,p3,nrow = 1)
+p2p3
+
+ggsave("F2_and_F3_orient.png", p2p3, device = "png", dpi = 300, path = here("doc/")) 
 ```
-```{R fig_width = 50}
+
+```{R echo = FALSE, fig_width = 50}
 p3
 p4
 p5
