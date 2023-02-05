@@ -61,7 +61,7 @@ CACGCATATCTATCGTAATGGTGGGGAGCA
 >4
 CAATCCAGTTAGCATGGTAATAAAGAACAC
 #+end_src
-The supplied reads file consits of 1000 short sequencing reads of 30 nucleotides each.
+The supplied reads file consits of 1000 short sequencing reads of 30 nucleotides each. They will be mapped to both the sense and antisense strand of the reference genome.
 
 * How does the code work?
 
