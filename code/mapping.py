@@ -45,7 +45,7 @@ def compStrand(sequences):                                    #returns the compl
 
 
 
-def Barplot(gotReads, mappedGenome, gotGenome, path = "./"):             #create a bar plot showing occurrence for all reads for each genome; input return from getReads, mapGenome and getGenome
+def Barplot(mappedGenome, gotGenome, path = "./"):             #create a bar plot showing occurrence for all reads for each genome; input return from getReads, mapGenome and getGenome
     if not path =="./":                                              #create output path if not existing
         if not os.path.exists(path):
             os.makedirs(path)
@@ -93,8 +93,8 @@ def mapGenome(genomes, Reads):                                      #return dict
     comp_genome = str(compStrand(genomes[0]))
 
     for read in Reads:
-          posFor = [i.start() for i in re.finditer(read, genome)]
-          posRev = [i.start() for i in re.finditer(read, comp_genome)]
+          posFor = [i.start() for i in re.finditer('(?=%s)' % (read), genome)]
+          posRev = [i.start() for i in re.finditer('(?=%s)' % (read), comp_genome)]
           posOut = [posFor, posRev]
           mapped[read] = posOut
 
