@@ -64,7 +64,8 @@ CAATCCAGTTAGCATGGTAATAAAGAACAC
 The supplied reads file consits of 1000 short sequencing reads of 30 nucleotides each.
 
 * How does the code work?
-Write a decription of the code here...
+
+Our code is 
 
 ** mapping.py
 
@@ -241,10 +242,11 @@ Process finished with exit code 0
 
 [[./output/NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.png]]
 
-
-* Mapping output and Statistics
 ** python returns a .csv file
 insert Excel screenshot
+
+* Mapping output and Statistics
+
 
 ** Visulisation with R and ggplot2
 
