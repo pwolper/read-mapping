@@ -1,6 +1,4 @@
-# Visualisation of mapped sequencing reads
-
-```{R message=F, echo = FALSE}
+## ----message=F, echo = FALSE-------------------------------------------------
 library(ggplot2)
 library(dplyr)
 library(purrr)
@@ -22,11 +20,9 @@ if (!require(ggpubr)) {
   install.packages("ggpubr")
   library(ggpubr)
 }
-```
-The following packages were used for this anlysis: ggplot2, dplyr, purrr, here, ape, ggrepel, ggpubr.
 
-Definein- and output directories in case of running script seperatley:
-```{R echo=FALSE}
+
+## ----echo=FALSE--------------------------------------------------------------
 if(exists(output)){
 }else{
   output <- here("output/img")
@@ -51,16 +47,14 @@ if (file.exists(output)){
 
 inputGenome
 mapfile
-```
-```{R}
+
+## ----------------------------------------------------------------------------
 genome <- read.dna(inputGenome,format="fasta")
 sequence <- as.character(genome)
 genome_length <- length(sequence)
-```
 
-## Importing data from /output/*.csv
 
-```{R}
+## ----------------------------------------------------------------------------
 mapped <- read.csv(pathMap,sep = ";")
 
 # mapped = mapped[50:60,]
@@ -78,9 +72,9 @@ anti %>% length()
 reads <- data.frame(pos = c(sense, anti),
                     strand = as.factor(rep(c("s","a"),
                     times = c(length(sense),length(anti)))))
-```
 
-```{R echo=FALSE}
+
+## ----echo=FALSE--------------------------------------------------------------
 pie1 <- data.frame(Group = c("Sense", "Anti-Sense"), amount = c(length(sense),length(anti)))
 pie1 <- pie1 %>%
   arrange(desc(Group)) %>%
@@ -121,10 +115,9 @@ MapNum <- MapNum %>%                                 #Calculate positions for la
          pos = if_else(is.na(pos), Hits/2, pos))
 
 
-```
 
-## Plotting mapped reads
-```{R}
+
+## ----------------------------------------------------------------------------
 p1 <- ggplot(reads, aes(x = pos, y = ..density..)) +
   geom_histogram(bins = 155, color = "green4", fill = "green2") + 
   geom_density(color = "darkgreen", lwd=1.3, bw = 70000)+
@@ -147,17 +140,13 @@ p2 <- ggplot(reads) +
 
 ggsave("F1_Genome_pos_total.png",p1, device = "png", dpi = 300, path = output)
 ggsave("F2_Genome_pos_orient.png",p2, device = "png", dpi = 300, path = output) 
-```
-```{R echo = FALSE,fig_width = 100}
+
+## ----echo = FALSE,fig_width = 100--------------------------------------------
 p1
 p2
-```
 
 
-Description Fig 1: Density of reads mapped to the E.coli genome. Each bin size represents a 30 kb long segment along the genome.
-Description Fig 2: Sense vs. Antisense density of mapped reads. The y-axis shows a number of counts per 30 Kb segment. 
-
-```{R}
+## ----------------------------------------------------------------------------
 p3 <- ggplot(pie1, aes(x="", y=amount, fill=Group)) +
   geom_bar(stat="identity", width=1, color = "black") +
   coord_polar("y", start=0)+
@@ -209,9 +198,4 @@ p1p4 <- ggpubr::ggarrange(p1,p4, nrow = 1, widths = c(1,1),heights = c(1,10),
 ggsave("F1_and_F4_reads.png", p1p4, device = "png", dpi = 300, path = here("doc/")) 
 
 ggsave("F2_and_F3_orient.png", p2p3, device = "png", dpi = 300, path = here("doc/")) 
-```
 
-
-Description Fig 3: Number of successful hits to sense or anti-sense strand.
-Description Fig 4: Number of reads mapped to sense strand, anti-sense strand, both strands or none in Genome
-Description Fig 5: Frequency of hits per read. 
