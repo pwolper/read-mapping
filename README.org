@@ -65,13 +65,20 @@ The supplied reads file consits of 1000 short sequencing reads of 30 nucleotides
 
 * How does the code work?
 
-Our code is 
+Our code is diveded in three parts: 
+     
+1. *mapping.py*:     Contains functions for data handling
+    
+1. *main.py*: Function call
+    
+1. *read-vis.Rmd*: Visualizaltion
+   
 
 ** mapping.py
 
-*** getGenome
-...
-Source code blocks like this:
+*** getGenome()
+
+getGenome() uses .fasta file as input and parses description and genome into an array of an array using biopython.
 
 #+begin_src python
 
@@ -82,35 +89,38 @@ def getGenome(file):                                    #return sequences and de
         seq = record.seq
         des = record.description
         sequences.append(str(seq))
-        print(des)
         descriptions.append(des)
-    return(sequences, descriptions)
+    return(sequences, descriptions)                     #returns array of sequences and genome descriptions
 
 #+end_src
 
-*** getReads
+*** getReads()
+
+getReads() uses .fasta file as input and parses all sequence reads into an array using biopython.
 
 #+begin_src python
 
 def getReads(file):                                     #return reads to map from source file as array (input preferably txt)
-    nucl = ["A","T","C","G"]
+    nucl = ["A","T","C","G"]                            
     reads = []
     with open(file) as read:
         for line in read.readlines():
-            if any(base in line for base in nucl):
+            if any(base in line for base in nucl):      #check if DNA
                 line = line[:-1]
                 reads.append(line)
-    return (reads)
+    return (reads)                                      #returns array of reads
 
 #+end_src
 
-*** compStrand
+*** compStrand()
+
+compStrand() takes any DNA sequence and returns the complementary strand in 5' -> 3' direction.
 
 #+begin_src python
 
 def compStrand(sequences):                               #returns the complementary string of entered sequence as string
     comp_sequences = []
-    nucl = {"A": "T", "C": "G", "T": "A", "G": "C"}
+    nucl = {"A": "T", "C": "G", "T": "A", "G": "C"}      #creates dictonary of complementary DNA bases 
     for s in sequences:
         comp_s = str()
         for position,base in enumerate(s):
@@ -118,77 +128,31 @@ def compStrand(sequences):                               #returns the complement
                 print("Not a valid DNA sequence! Check position",position,"!")
                 sys.exit("Script terminated...")
             else:
-                comp_s += nucl[base]
-        comp_sequences.append(comp_s[::-1])
-    return comp_sequences                                #output reverse complementary sequence
+                comp_s += nucl[base]                    #add complementary base to comp_s
+        comp_sequences.append(comp_s[::-1])             #reverse comp_s
+    return comp_sequences                               #return reverse complementary sequence comp_s
 
 #+end_src
 
-*** Barplot
+*** mapGenome()
+
+mapGenome() takes both .fasta files as input and mappes every read onto the genome. Returns dictionary of read sequence and sense/anti-sense positions. 
+
+Uses getGenome(), getReads() and compStrand()
 
 #+begin_src python
 
-def Barplot(gotReads, mappedGenome, gotGenome, path = "./"):                #create a bar plot showing occurrence for all reads for each genome; input return from getReads, mapGenome and getGenome
-    if not path =="./":                                                     #create output path if not existing
-        if not os.path.exists(path):
-            os.makedirs(path)
-    fileName = str(path)+ "/"+str(datetime.today().strftime('%Y-%m-%d_'))+ str(gotGenome[1][0]) + ".png"
-
-    number = []
-    for entry in mappedGenome:
-            m = mappedGenome[entry][0] + mappedGenome[entry][1]
-            number.append(len(m))
-    plt.bar(range(len(number)), number)
-    plt.xlabel("Read Number in File")
-    plt.ylabel("Occurrences in Genome")
-    plt.savefig(fileName)
-    plt.clf()
-    print("Boxplot created in",path,"!")
-
-#+end_src
-
-*** MapSummary
-
-#+begin_src python
-
-def MapSummary(mappedGenome, gotGenome, path = "./"):          #create a summary after the genome is mapped in a txt file for each genome; input return from getReads, mapGenome and getGenome
-    if not path =="./":                                              #create output path if not existing
-        if not os.path.exists(path):
-            os.makedirs(path)
-    fileName = str(path)+ "/" +str(datetime.today().strftime('%Y-%m-%d_'))+ str(gotGenome[1][0]) +".csv"            #create file name for current genome from fasta description
-
-    with open(fileName, "w", newline = "") as f:                                     #create file
-        f = csv.writer(f, delimiter = ";")
-        header = ["Read", "Sense", "Antisense", "Number of sense hits", "Number of antisense hits", "Number of total hits"]
-        f.writerow(header)
-        for read in mappedGenome:
-            sense = ", ".join(str(x) for x in mappedGenome[read][0])
-            anti = ", ".join(str(x) for x in mappedGenome[read][1])
-            n_sense = len(mappedGenome[read][0])                     #write number of found positions
-            n_anti = len(mappedGenome[read][1])
-            n_total = n_sense + n_anti
-            cols = [str(read),sense,anti,str(n_sense),str(n_anti),str(n_total)]
-            f.writerow(cols)
-            # entry = ";".join(str(x) for x in cols)
-
-    print("Successfully wrote summary file to",path,"!")
-#+end_src
-
-*** mapGenome
-
-#+begin_src python
-
-def mapGenome(genomes, Reads):                                      #return dictionary with genome description and read as key and starting positions in genome as value (returns list of list
+def mapGenome(genomes, Reads):                                              #return dictionary with genome description and read as key and starting positions in                                                                                     genome as value.
     start = time.time()
     print("mapping reads to genome...")
 
-    mapped = {}                                                     #create dictionary for output
-    genome = str(genomes[0])
-    comp_genome = str(compStrand(genomes[0]))
+    mapped = {}                                                             #create dictionary for output
+    genome = str(genomes[0])                                                #create sense string
+    comp_genome = str(compStrand(genomes[0]))                               #create anti-sense string              
 
     for read in Reads:
-          posFor = [i.start() for i in re.finditer(read, genome)]
-          posRev = [i.start() for i in re.finditer(read, comp_genome)]
+          posFor = [i.start() for i in re.finditer'(?=%s)' % (read), genome)]           #map reads to sense strand using re.finditer to get all positions
+          posRev = [i.start() for i in re.finditer('(?=%s)' % (read), comp_genome)]      #map reads to anti-sense strand using re.finditer to get all positions
           posOut = [posFor, posRev]
           mapped[read] = posOut
 
@@ -197,6 +161,63 @@ def mapGenome(genomes, Reads):                                      #return dict
     return(mapped)
 
 #+end_src
+
+*** Barplot()
+
+Barplot() creates a barplot as an first impression on the dataset. Shows read number on x axis and total number of hits on y axis.
+
+#+begin_src python
+
+def Barplot(mappedGenome, gotGenome, path = "./"):                          #create a bar plot showing occurrence for all reads for each genome; input return from                                                                                  mapGenome and getGenome
+    if not path =="./":                                                     #create output path if not existing
+        if not os.path.exists(path):
+            os.makedirs(path)
+    fileName = str(path)+ "/"+str(datetime.today().strftime('%Y-%m-%d_'))+ str(gotGenome[1][0]) + ".png"
+                                                                            #create filepath
+    number = []
+    for entry in mappedGenome:                                              #write sum of hits in sense and anti sense strand per read in array "number"
+            m = mappedGenome[entry][0] + mappedGenome[entry][1]
+            number.append(len(m))
+    plt.bar(range(len(number)), number)                                     #plot bar chart and save in output folder
+    plt.xlabel("Read Number in File")
+    plt.ylabel("Occurrences in Genome")
+    plt.savefig(fileName)
+    plt.clf()
+    print("Boxplot created in",path,"!")
+
+#+end_src
+
+*** MapSummary()
+
+MapSummary() creates a .csv file containing all usefull information from mapping for further analysis
+
+#+begin_src python
+
+def MapSummary(mappedGenome, gotGenome, path = "./"):                       #create a summary after the genome is mapped in a .csv file for each genome; input: return                                                                              from getReads, mapGenome and getGenome
+    if not path =="./":                                                     #create output path if not existing
+        if not os.path.exists(path):
+            os.makedirs(path)
+    fileName = str(path)+ "/" +str(datetime.today().strftime('%Y-%m-%d_'))+ str(gotGenome[1][0]) +".csv"           
+                                                                            #create file name for current genome from fasta description
+                                                                            
+    with open(fileName, "w", newline = "") as f:                            #create file
+        f = csv.writer(f, delimiter = ";")
+        header = ["Read", "Sense", "Antisense", "Number of sense hits", "Number of antisense hits", "Number of total hits"]
+        f.writerow(header)
+        for read in mappedGenome:                                           #loop through mappedGenome and write calculated information into file 
+            sense = ", ".join(str(x) for x in mappedGenome[read][0])        #write Read
+            anti = ", ".join(str(x) for x in mappedGenome[read][1])
+            n_sense = len(mappedGenome[read][0])                           
+            n_anti = len(mappedGenome[read][1])                             
+            n_total = n_sense + n_anti                                           
+            cols = [str(read),sense,anti,str(n_sense),str(n_anti),str(n_total)]
+                                                                            #write read, position sense, position antisense, hits sense, hits antisense and total hits
+            f.writerow(cols)
+            # entry = ";".join(str(x) for x in cols)
+
+    print("Successfully wrote summary file to",path,"!")
+#+end_src
+
 
 ** main.py
 
@@ -222,7 +243,7 @@ Barplot(Reads,mapped, genome, path)                                             
 
 #+end_src
 
-*** Console Ouput
+*** Console Output
 
 #+begin_src shell
 
@@ -246,7 +267,7 @@ Process finished with exit code 0
 
 Output of the MapSummary function:
 
-![Excel_mapping](https://user-images.githubusercontent.com/77248262/216795569-6263f326-0f92-4fa9-9f11-6695a226f7bc.PNG)
+[[https://user-images.githubusercontent.com/77248262/216795712-b44b1abf-036a-4c10-a577-aafaf22c1de7.JPG]]
 
 * Mapping output and Statistics
 
