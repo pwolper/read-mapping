@@ -136,7 +136,7 @@ p4 <- ggplot(pie2, aes(x="", y=value, fill=Group)) +
   geom_bar(stat="identity", width=1, color = "black") +
   coord_polar("y", start=0)+
   theme_void()+
-  theme(legend.position="bottom", legend.key.size = unit(1,'cm'), legend.text = element_text(size = 10)) +
+  theme(legend.position="right", legend.key.size = unit(1,'cm'), legend.text = element_text(size = 10)) +
   theme(legend.title= element_blank()) +
   geom_label_repel(aes(y=ypos, label = value),
                    segment.colour = "black",size = 7, nudge_x = 0.7, show.legend = FALSE) +
@@ -163,6 +163,11 @@ ggsave("F5_Reads_by_number_of_hits.png",p5 ,device = "png", dpi = 300, path = ou
 
 p2p3 <- ggpubr::ggarrange(p2,p3,nrow = 1, widths = c(1,0.5), align = "h")
 p2p3
+
+p1p4 <- ggpubr::ggarrange(p1,p4, nrow = 1, widths = c(1.3,1), align = "h")
+#p1p4
+
+ggsave("F1_and_F4_reads.png", p1p4, device = "png", dpi = 300, path = here("doc/")) 
 
 ggsave("F2_and_F3_orient.png", p2p3, device = "png", dpi = 300, path = here("doc/")) 
 ```
