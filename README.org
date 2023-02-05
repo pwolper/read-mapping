@@ -275,7 +275,7 @@ Output of the MapSummary function:
 
 ** Visulisation with R and ggplot2
 
-[[file:output/img/F3_Hits_sense_vs_antisense.png]]
+[[file:output/img/F4_Read_distribution.png]]
 *Figure 1*: Results of the read mapping. Strands are shown to have either mapped to the sense, antisense or both strands. Alternatively some strands where not identified on the reference genome.
 
 [[file:output/img/F1_Genome_pos_total.png]]
