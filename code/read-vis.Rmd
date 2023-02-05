@@ -153,8 +153,8 @@ p3 <- ggplot(pie1, aes(x="", y=amount, fill=Group)) +
   geom_bar(stat="identity", width=1, color = "black") +
   coord_polar("y", start=0)+
   theme_void()+
-  theme(legend.position="bottom",legend.key.size = unit(1,'cm'), legend.text = element_text(size = 10)) +
-  theme(legend.title= element_blank()) +
+  ## theme(legend.position="bottom",legend.key.size = unit(1,'cm'), legend.text = element_text(size = 10)) +
+  ## theme(legend.title= element_blank()) +
   geom_text(aes(x = 1, y = ypos, label = amount), color = "white", size=5)+
   scale_fill_manual(values= c("#ff4000","#0040ff"))# +
   # labs(caption = "Fig 3")
@@ -193,7 +193,7 @@ ggsave("F5_Reads_by_number_of_hits.png",p5 ,device = "png", dpi = 300, path = ou
 p2p3 <- ggpubr::ggarrange(p2,p3,nrow = 1, widths = c(1,0.5), align = "h") +coord_fixed()
 p2p3
 
-p1p4 <- ggpubr::ggarrange(p1,p4, nrow = 1, widths = c(1,0.6),heights = c(1,1.5), align = "v", common.legend = TRUE)
+p1p4 <- ggpubr::ggarrange(p1,p4, nrow = 1, widths = c(1,1),heights = c(1,10), align = "v", common.legend = TRUE)
 p1p4
 
 ggsave("F1_and_F4_reads.png", p1p4, device = "png", dpi = 300, path = here("doc/")) 
