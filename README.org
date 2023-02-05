@@ -1,8 +1,8 @@
 #+title: Mapping reads to the genome
 
-Authors: Niklas Horner, Abdullah Cetinkaya, Philip Wolper
-Exam project for the class "Introduction to Programming for Biologists"
-Date: 01/2023
+*** Authors: Niklas Horner, Abdullah Cetinkaya, Philip Wolper
+*** Exam project for the class "Introduction to Programming for Biologists"
+*** Date: 01/2023
 
 Link to GitHub repository: https://github.com/pwolper/read-mapping
 
