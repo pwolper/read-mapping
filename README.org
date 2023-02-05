@@ -259,7 +259,7 @@ Process finished with exit code 0
 #+end_src
 
 
-*** A first glace at mapping results
+*** A first glance at mapping results
 
 [[./output/NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.png]]
 
