@@ -276,7 +276,8 @@ Output of the MapSummary function:
 ** Visulisation with R and ggplot2
 
 
-[[file:doc/F1_and_F4_reads.png]]
+
+[[./output/img/F1_Genome_pos_total.png]]
 *Figure 1*: The Density of hits mapped across the /E.coli/ chromosome. Each bin represents a genomic segment of approximately 30 Kb in length.
 
 [[file:doc/F2_and_F3_orient.png]]
