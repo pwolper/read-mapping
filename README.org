@@ -275,16 +275,17 @@ Output of the MapSummary function:
 
 ** Visulisation with R and ggplot2
 
-
+[[file:output/img/F3_Hits_sense_vs_antisense.png]]
+*Figure 1*: Results of the read mapping. Strands are shown to have either mapped to the sense, antisense or both strands. Alternatively some strands where not identified on the reference genome.
 
 [[file:output/img/F1_Genome_pos_total.png]]
-*Figure 1*: The Density of hits mapped across the /E.coli/ chromosome. Each bin represents a genomic segment of approximately 30 Kb in length.
+*Figure 2*: The Density of hits mapped across the /E.coli/ chromosome. Each bin represents a genomic segment of approximately 30 Kb in length.
 
 [[file:doc/F2_and_F3_orient.png]]
-*Fig 2*: Strand orientation of the mapped reads to sense or antisense. The sense strand is shown in blue and the antisense strand in red. Each bin represents a genomic segment of appproximately 30 Kb in length.
+*Fig 3*: Strand orientation of the mapped reads to sense or antisense. The sense strand is shown in blue and the antisense strand in red. Each bin represents a genomic segment of appproximately 30 Kb in length.
 
 [[file:output/img/F5_Reads_by_number_of_hits.png]]
-*Figure 3*: Frequency spectrum of hits per read. Most reads are only mapped once, while some occur at higher frequency, the highest frequency of read is 37x.
+*Figure 4*: Frequency spectrum of hits per read. Most reads are only mapped once, while some occur at higher frequency, the highest frequency of read is 37x.
 
 * Resources
 
