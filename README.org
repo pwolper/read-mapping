@@ -213,7 +213,7 @@ path = "./output"                                                               
 
 *** Console Ouput
 
-#+begin_src python
+```shell
 
 Currently: Sun Feb  5 01:19:34 2023
 NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome
@@ -223,8 +223,8 @@ Successfully wrote summary file to ./output !
 Boxplot created in ./output !
 
 Process finished with exit code 0
+```
 
-#+end_src
 
 *** A first glace at mapping results
 
