@@ -236,6 +236,23 @@ mapped = mapGenome(genome,Reads)                                                
 MapSummary(mapped, genome, path)                                                                    #generate .csv summary in output path
 Barplot(Reads,mapped, genome, path)                                                                 #generate barplot for overview
 
+#Run R-script
+
+
+        #please enter image output path
+robjects.r('''
+output <- 'C:/Users/nikla/Desktop/readmap_fin/read-mapping/output/img'
+''')
+        #please enter genome.fasta input path
+robjects.r('''
+inputGenome <- "C:/Users/nikla/Desktop/readmap_fin/read-mapping/data/Ecoli_genome.fasta"
+''')
+        #please enter MapSummary input path
+robjects.r('''
+pathMap <- "C:/Users/nikla/Desktop/readmap_fin/read-mapping/output/2023-01-27_NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.csv"
+''')
+robjects.r.source("read-vis.R")
+
 #+end_src
 
 *** Console Output
