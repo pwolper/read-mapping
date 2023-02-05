@@ -197,10 +197,6 @@ def mapGenome(genomes, Reads):                                      #return dict
 
 #+end_src
 
-*** A first glace at mapping results
-
-[[./output/NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.png]]
-
 ** main.py
 
 Here previous functions are called and the magic happens:
@@ -212,6 +208,27 @@ from mapping import *                                                           
 
 print("Currently:", time.ctime())
 path = "./output"                                                                                   #specify path for output
+
+#+end_src
+
+*** Console Ouput
+
+#+begin_src python
+
+Currently: Sun Feb  5 01:19:34 2023
+NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome
+mapping reads to genome...
+Finished mapping 1000 reads in 29 s!
+Successfully wrote summary file to ./output !
+Boxplot created in ./output !
+
+Process finished with exit code 0
+
+#+end_src
+
+*** A first glace at mapping results
+
+[[./output/NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.png]]
 
 
 # Running the read-mapper defined in mapping.py
