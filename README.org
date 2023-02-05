@@ -261,7 +261,7 @@ Process finished with exit code 0
 
 *** A first glance at mapping results
 
-[[./output/NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.png]]
+[[./output/2023-01-27_NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.png]]
 
 ** python returns a .csv file
 
