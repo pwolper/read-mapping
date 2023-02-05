@@ -136,8 +136,8 @@ p4 <- ggplot(pie2, aes(x="", y=value, fill=Group)) +
   geom_bar(stat="identity", width=1, color = "black") +
   coord_polar("y", start=0)+
   theme_void()+
-  theme(legend.position="bottom") +
-  theme(legend.title= element_blank()) +
+  # theme(legend.position="bottom") +
+  # theme(legend.title= element_blank()) +
   geom_label_repel(aes(y=ypos, label = value), colour = "white",
                    segment.colour = "black",size = 7, nudge_x = 0.6, show.legend = FALSE) +
   # geom_text(aes(x = 1.15, y = ypos, label = value), color = "white", size=5)+
