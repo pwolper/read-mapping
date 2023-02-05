@@ -45,8 +45,7 @@ if (file.exists(output)){
 
 }
 
-inputGenome
-mapfile
+
 
 ## ----------------------------------------------------------------------------
 genome <- read.dna(inputGenome,format="fasta")

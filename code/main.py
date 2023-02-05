@@ -1,20 +1,22 @@
 #!/usr/bin/env python3
 from time import ctime
 from mapping import *
+import pathlib
 import rpy2.robjects as robjects
+
 
 print("Currently:", time.ctime())
 path = "./output"
 
 
 # Running the read-mapper defined in mapping.py
-genome = getGenome("data/Ecoli_genome.fasta")
-Reads = getReads("data/reads_new.fasta")
+genome = getGenome((str(pathlib.Path().resolve())[:-4])+"/data/Ecoli_genome.fasta")
+Reads = getReads((str(pathlib.Path().resolve())[:-4])+"data/reads_new.fasta")
 
 mapped = mapGenome(genome,Reads)                             #mapping reads
 
 MapSummary(mapped, genome, path)
-Barplot(Reads,mapped, genome, path)
+Barplot(mapped, genome, path)
 
 
 
@@ -31,6 +33,6 @@ inputGenome <- "C:/Users/nikla/Desktop/readmap_fin/read-mapping/data/Ecoli_genom
 ''')
         #please enter MapSummary input path
 robjects.r('''
-inputMap <- "C:/Users/nikla/Desktop/readmap_fin/read-mapping/output/2023-01-27_NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.csv"
+pathMap <- "C:/Users/nikla/Desktop/readmap_fin/read-mapping/output/2023-01-27_NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.csv"
 ''')
 robjects.r.source("read-vis.R")
