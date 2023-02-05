@@ -174,16 +174,15 @@ p4 <- ggplot(pie2, aes(x="", y=value, fill=Group)) +
   # labs(caption = "Fig 4")
 p4
 
-p5 <- ggplot(MapNum, aes(x="", y=Hits, fill=factor(Mappings))) +
+p5 <- ggplot(MapNum, aes(x = factor(Mappings),y=Hits, fill=factor(Mappings))) +
   geom_bar(stat="identity", width=1, color = "black") +
   # coord_polar("y", start=0)+
-  theme_void()+
-  theme(legend.position="top") +
-  scale_fill_brewer(name="Frequency of read",palette="Pastel1")+
+  theme_classic()+
+  scale_fill_brewer(name="Frequency of read",palette="Greens")+
   geom_label_repel(data = MapNum,
                    aes(y = pos, label = paste0(Hits, " (",Fraction, "%)")),
-                   size = 5, nudge_x = 0.7, show.legend = FALSE) +
-labs(caption = "Fig 5")
+                   size = 5, nudge_y = 1, show.legend = FALSE) +
+labs(x = "Number of hits per read", caption = "Fig 5")
 p5
 
 ggsave("F3_Hits_sense_vs_antisense.png",p3 ,device = "png", dpi = 300, path = output)
