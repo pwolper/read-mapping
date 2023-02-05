@@ -197,7 +197,7 @@ def mapGenome(genomes, Reads):                                      #return dict
 
 #+end_src
 
-[[./output/img/NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.png]]
+[[./output/NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.png]]
 
 * Mapping output and Statistics
 ** python returns a .csv file
