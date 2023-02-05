@@ -139,7 +139,7 @@ p4 <- ggplot(pie2, aes(x="", y=value, fill=Group)) +
   theme(legend.position="right", legend.key.size = unit(1,'cm'), legend.text = element_text(size = 10)) +
   theme(legend.title= element_blank()) +
   geom_label_repel(aes(y=ypos, label = value),
-                   segment.colour = "black",size = 7, nudge_x = 0.7, show.legend = FALSE) +
+                   segment.colour = "black",size = 7, nudge_x = 0.5, show.legend = FALSE) +
   # geom_text(aes(x = 1.15, y = ypos, label = value), color = "white", size=5)+
   scale_fill_manual(values= c("#0040ff","#ff4000","orange","grey"))#+
   # labs(caption = "Fig 4")
@@ -161,11 +161,11 @@ ggsave("F3_Hits_sense_vs_antisense.png",p3 ,device = "png", dpi = 300, path = ou
 ggsave("F4_Read_distribution.png",p4, device = "png", dpi = 300, path = output)
 ggsave("F5_Reads_by_number_of_hits.png",p5 ,device = "png", dpi = 300, path = output)
 
-p2p3 <- ggpubr::ggarrange(p2,p3,nrow = 1, widths = c(1,0.5), align = "h")
+p2p3 <- ggpubr::ggarrange(p2,p3,nrow = 1, widths = c(1,0.5), align = "h") +coord_fixed()
 p2p3
 
-p1p4 <- ggpubr::ggarrange(p1,p4, nrow = 1, widths = c(1.3,1), align = "h")
-#p1p4
+p1p4 <- ggpubr::ggarrange(p1,p4, nrow = 1, widths = c(1,1), align = "h")
+p1p4
 
 ggsave("F1_and_F4_reads.png", p1p4, device = "png", dpi = 300, path = here("doc/")) 
 
