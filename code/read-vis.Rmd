@@ -136,11 +136,14 @@ p4 <- ggplot(pie2, aes(x="", y=value, fill=Group)) +
   geom_bar(stat="identity", width=1, color = "black") +
   coord_polar("y", start=0)+
   theme_void()+
-  theme(legend.position="top") +
+  theme(legend.position="bottom", legend.key.size = unit(1,'cm'), legend.text = element_text(size = 10)) +
   theme(legend.title= element_blank()) +
-  geom_text(aes(x = 1.15, y = ypos, label = value), color = "white", size=5)+
-  scale_fill_manual(values= c("#0040ff","#ff4000","green2","black"))+
-  labs(caption = "Fig 4")
+  geom_label_repel(aes(y=ypos, label = value),
+                   segment.colour = "black",size = 7, nudge_x = 0.7, show.legend = FALSE) +
+  # geom_text(aes(x = 1.15, y = ypos, label = value), color = "white", size=5)+
+  scale_fill_manual(values= c("#0040ff","#ff4000","orange","grey"))#+
+  # labs(caption = "Fig 4")
+p4
 
 p5 <- ggplot(MapNum, aes(x="", y=Hits, fill=factor(Mappings))) +
   geom_bar(stat="identity", width=1, color = "black") +
@@ -153,15 +156,16 @@ p5 <- ggplot(MapNum, aes(x="", y=Hits, fill=factor(Mappings))) +
                    aes(y = pos, label = paste0(Hits, " (",Fraction, "%)")),
                    size = 5, nudge_x = 0.5, show.legend = FALSE) +
 labs(caption = "Fig 5")
+p5
 
 ggsave("F3_Hits_sense_vs_antisense.png",p3 ,device = "png", dpi = 300, path = output)
 ggsave("F4_Read_distribution.png",p4, device = "png", dpi = 300, path = output)
 ggsave("F5_Reads_by_number_of_hits.png",p5 ,device = "png", dpi = 300, path = output)
 
-p2p3 <- ggpubr::ggarrange(p2,p3,nrow = 1, widths = c(1,1), heights = c(0.5,2), align = "h") + coord_equal()
+p2p3 <- ggpubr::ggarrange(p2,p3,nrow = 1, widths = c(1,0.5), align = "h")
 p2p3
 
-ggsave("F2_and_F3_orient.png", p2p3, device = "png",width = 30, dpi = 300, path = here("doc/")) 
+ggsave("F2_and_F3_orient.png", p2p3, device = "png", dpi = 300, path = here("doc/")) 
 ```
 
 ```{R echo = FALSE, fig_width = 50}
