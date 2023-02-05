@@ -266,19 +266,21 @@ Process finished with exit code 0
 ** python returns a .csv file
 
 Output of the MapSummary function:
+[[./doc/csv_view.jpeg]]
 
-[[https://user-images.githubusercontent.com/77248262/216795712-b44b1abf-036a-4c10-a577-aafaf22c1de7.JPG]]
 
 * Mapping output and Statistics
 
 
 ** Visulisation with R and ggplot2
 
-#+attr_org: :width 200
+#+attr_html: :width 200
 [[./output/img/F1_Genome_pos_total.png]]
+*Figure 1*: The Density of hits mapped across the /E.coli/ chromosome. Each bin represents a genomic segment of approximately 30 Kb in length.
 
-#+attr_org: :width 200
+#+attr_html: :width 200
 [[./output/img/F2_Genome_pos_orient.png]]
+*Figure 2*: Comparison of hits on each strand of genomic DNA. The sense strand is shown in blue and the antisense strand in red. Each bin represents a genomic segment of approximately 30 Kb in length.
 
 
 
