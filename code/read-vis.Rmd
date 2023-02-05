@@ -27,7 +27,7 @@ The following packages were used for this anlysis: ggplot2, dplyr, purrr, here, 
 
 Definein- and output directories in case of running script seperatley:
 ```{R echo=FALSE}
-if(exists(output)){
+if(exists("output")){
 }else{
   output <- here("output/img")
 }
