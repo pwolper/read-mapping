@@ -243,7 +243,10 @@ Process finished with exit code 0
 [[./output/NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.png]]
 
 ** python returns a .csv file
-insert Excel screenshot
+
+Output of the MapSummary function:
+
+![Excel_mapping](https://user-images.githubusercontent.com/77248262/216795569-6263f326-0f92-4fa9-9f11-6695a226f7bc.PNG)
 
 * Mapping output and Statistics
 
