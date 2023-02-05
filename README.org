@@ -274,10 +274,10 @@ Output of the MapSummary function:
 
 ** Visulisation with R and ggplot2
 
-#+attr_org: :width 400
+#+attr_org: :width 200
 [[./output/img/F1_Genome_pos_total.png]]
 
-#+attr_org: :width 400
+#+attr_org: :width 200
 [[./output/img/F2_Genome_pos_orient.png]]
 
 
