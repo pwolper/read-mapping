@@ -68,7 +68,7 @@ Write a decription of the code here...
 
 ** mapping.py
 
-***getGenome
+*** getGenome
 ...
 Source code blocks like this:
 
@@ -87,7 +87,7 @@ def getGenome(file):                                    #return sequences and de
 
 #+end_src
 
-***getReads
+*** getReads
 
 #+begin_src python
 
@@ -103,7 +103,7 @@ def getReads(file):                                     #return reads to map fro
 
 #+end_src
 
-***compStrand
+*** compStrand
 
 #+begin_src python
 
@@ -123,7 +123,7 @@ def compStrand(sequences):                               #returns the complement
 
 #+end_src
 
-***Barplot
+*** Barplot
 
 #+begin_src python
 
@@ -146,7 +146,7 @@ def Barplot(gotReads, mappedGenome, gotGenome, path = "./"):                #cre
 
 #+end_src
 
-***MapSummary
+*** MapSummary
 
 #+begin_src python
 
@@ -173,7 +173,7 @@ def MapSummary(mappedGenome, gotGenome, path = "./"):          #create a summary
     print("Successfully wrote summary file to",path,"!")
 #+end_src
 
-***mapGenome
+*** mapGenome
 
 #+begin_src python
 
