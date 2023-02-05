@@ -197,7 +197,33 @@ def mapGenome(genomes, Reads):                                      #return dict
 
 #+end_src
 
+*** A first glace at mapping results
+
 [[./output/NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.png]]
+
+** main.py
+
+Here previous functions are called and the magic happens:
+
+#+begin_src python
+
+from time import ctime                                                                              #Import ctime for current time
+from mapping import *                                                                               #Import mapping.py functions
+
+print("Currently:", time.ctime())
+path = "./output"                                                                                   #specify path for output
+
+
+# Running the read-mapper defined in mapping.py
+genome = getGenome("data/Ecoli_genome.fasta")                                                       #parse genome and genome description to array
+Reads = getReads("data/reads_new.fasta")                                                            #parse reads to array
+
+mapped = mapGenome(genome,Reads)                                                                    #map reads to genome
+
+MapSummary(mapped, genome, path)                                                                    #generate .csv summary in output path
+Barplot(Reads,mapped, genome, path)                                                                 #generate barplot for overview
+
+#+end_src
 
 * Mapping output and Statistics
 ** python returns a .csv file
