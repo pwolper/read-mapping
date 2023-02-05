@@ -272,7 +272,7 @@ Output of the MapSummary function:
 
 * Mapping output and Statistics
 
-
+The R code can be knitted from an .Rmd document located at: [[file:code/read-vis.Rmd]] and the exported version is located at:[[file:code/read-vis-exported.pdf]].
 ** Visulisation with R and ggplot2
 
 [[file:output/img/F4_Read_distribution.png]]
