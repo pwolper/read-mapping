@@ -18,8 +18,19 @@ if (!require(tidyverse)) {
   install.packages("tidyverse")
   library(tidyverse)
 }
+if (!require(ggpubr)) {
+  install.packages("ggpubr")
+  library(ggpubr)
+}
 
+#image output
 output <- here("output/img")
+if (file.exists(output)){
+
+} else {
+    dir.create(file.path(output))
+
+}
 ```
 
 ```{R}
