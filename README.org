@@ -65,7 +65,7 @@ The supplied reads file consits of 1000 short sequencing reads of 30 nucleotides
 
 * How does the code work?
 
-Our code is diveded in three parts: 
+Our code is divided in three parts:
      
 1. *mapping.py*:     Contains functions for data handling
     
