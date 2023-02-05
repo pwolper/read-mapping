@@ -1,23 +1,19 @@
-#+title: Project Outline
-#+description: Exam Project "Mapping the reads from NGS data to the genome"
-#+authors: Abdullah Cetinkaya, Niklas Horner, Philip Wolper
+#+title: Mapping reads to the genome
+
+Authors: Niklas Horner, Abdullah Cetinkaya, Philip Wolper
+Exam project for the class "Introduction to Programming for Biologists"
+Date: 01/2023
 
 Link to GitHub repository: https://github.com/pwolper/read-mapping
 
-***** Tasks to-do [0/4]
-- [-] Added two pie charts to R code. Maybe still one missing showing percentage of reads for each number of hits. Improve coloring
-- [ ] Fix the file path pointer accross the code.
-- [ ] Clean up Rmd output of the results. Arrange charts with each other (ggarrange? Can we run the render process from python script?
-- [ ] Write description of the project in the README. Maybe present using github website.
-
-* Description
+* Task
 _“Mapping” the reads from NGS data to the genome_
 
 - You have sequenced a genome with Illumina sequencing machine (single-end mode) and got a list of reads in FASTA file. For each read report the coordinate of the nucleotide where is has been mapped and to which strand it has been mapped.
 - Please also keep in mind that DNA is double-stranded. In Fasta file of the genome you have only one strand reported, though the read can be mapped onto any of the strand. So please check both strands.
 - Please provide the infographics showing how many reads have been mapped to the genome, how many have been mapped several times (how many times exactly?), how many haven’t been mapped.
 
-* Heading + Project Infos
+* Project Repository Infos
 _Project directory structure_
 #+begin_src shell
 $ ls -l
