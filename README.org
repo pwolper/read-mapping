@@ -201,6 +201,7 @@ def mapGenome(genomes, Reads):                                      #return dict
 
 Here previous functions are called and the magic happens:
 
+
 #+begin_src python
 
 from time import ctime                                                                              #Import ctime for current time
@@ -223,6 +224,7 @@ Successfully wrote summary file to ./output !
 Boxplot created in ./output !
 
 Process finished with exit code 0
+
 ```
 
 
