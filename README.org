@@ -8,7 +8,7 @@ Link to GitHub repository: https://github.com/pwolper/read-mapping
 * Task
 _“Mapping” the reads from NGS data to the genome_
 
-- You have sequenced a genome with Illumina sequencing machine (single-end mode) and got a list of reads in FASTA file. For each read report the coordinate of the nucleotide where is has been mapped and to which strand it has been mapped.
+- You have sequenced a genome with Illumina sequencing machine (single-end mode) and got a list of reads in FASTA file. For each read report the coordinate of the nucleotide where it has been mapped and to which strand it has been mapped.
 - Please also keep in mind that DNA is double-stranded. In Fasta file of the genome you have only one strand reported, though the read can be mapped onto any of the strand. So please check both strands.
 - Please provide the infographics showing how many reads have been mapped to the genome, how many have been mapped several times (how many times exactly?), how many haven’t been mapped.
 
@@ -62,11 +62,11 @@ The supplied reads file consits of 1000 short sequencing reads of 30 nucleotides
 
 Our code is divided in three parts:
      
-1. *mapping.py*:     Contains functions for data handling
+1. *mapping.py*: Data handling
     
+1. *read-vis.R*: Visualizaltion
+
 1. *main.py*: Function call
-    
-1. *read-vis.Rmd*: Visualizaltion
    
 
 ** mapping.py
