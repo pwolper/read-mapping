@@ -9,25 +9,23 @@ Link to GitHub repository: https://github.com/pwolper/read-mapping
 _“Mapping” the reads from NGS data to the genome_
 
 - You have sequenced a genome with Illumina sequencing machine (single-end mode) and got a list of reads in FASTA file. For each read report the coordinate of the nucleotide where it has been mapped and to which strand it has been mapped.
+
 - Please also keep in mind that DNA is double-stranded. In Fasta file of the genome you have only one strand reported, though the read can be mapped onto any of the strand. So please check both strands.
+
 - Please provide the infographics showing how many reads have been mapped to the genome, how many have been mapped several times (how many times exactly?), how many haven’t been mapped.
 
-* Project Repository Infos
-_Project directory structure_
-#+begin_src shell
-$ ls -l
+* Genome Mapping
 
-total 16
-drwxrwxr-x 2 philip philip 4096 Feb  4 14:12 code
-drwxrwxr-x 2 philip philip 4096 Jan 18 09:03 data
-drwxrwxr-x 3 philip philip 4096 Feb  4 14:11 output
--rw-rw-r-- 1 philip philip 2882 Feb  4 14:59 README.org
-#+end_src
+Genome mapping describes the identification of location as well distance of molecular markers on the genome. Often these markers are genes, but all other sequences could be of interest.
+
+Maps can be used as scaffolds for Whole Genome Sequencing (WGS), but also for many other downstreamm studies. Therefore they can help in understanding the genome of a certain species, identify disease markers or causes and even evolutionary studies. 
 
 * Data
 
 ** Genome sequencing data
-The genome data is required as /.fasta/ file format, and is found in the /data/ folder. Parsing of this happens in mapping.py.
+The reference genome data is required as /.fasta/ file format, and is found in the /data/ folder. Parsing of this happens in mapping.py.
+
+As an example the genome of E. coli K-12 was used as mapping reference.
 
 #+begin_src shell
 $ head data/Ecoli_genome.fasta
@@ -41,6 +39,8 @@ AACATGTCCTGCATGGCATTAGTTTGTTGGGGCAGTGCCCGGATAGCATCAACGCTGCGCTGATTTGCCGTGGCGAGAAA
 #+end_src
 
 ** Short sequencing reads
+
+Short DNA reads in form of a .fasta file to map against the reference genome:
 
 #+begin_src shell
 $ head data/reads_new.fasta
@@ -60,14 +60,16 @@ The supplied reads file consits of 1000 short sequencing reads of 30 nucleotides
 
 * How does the code work?
 
-Our code is divided in three parts:
+Our code is divided in four parts:
      
-1. *mapping.py*: Data handling
-    
-1. *read-vis.R*: Visualizaltion
+1. *main.py*: Core script to enter *parameters* and call functions
 
-1. *main.py*: Function call
-   
+1. *mapping.py*: Library of *data handling* functions
+
+1. *Report.R*: *Link* to knit R markdown report
+    
+1. *read-vis.R*: R markdown file for *visualization* and *report*
+
 
 ** mapping.py
 
@@ -209,7 +211,7 @@ def MapSummary(mappedGenome, gotGenome, path = "./"):                       #cre
                                                                             #write read, position sense, position antisense, hits sense, hits antisense and total hits
             f.writerow(cols)
             # entry = ";".join(str(x) for x in cols)
-
+    return(fileName)
     print("Successfully wrote summary file to",path,"!")
 #+end_src
 
@@ -221,37 +223,37 @@ Here previous functions are called and the magic happens:
 
 #+begin_src python
 
-from time import ctime                                                                              #Import ctime for current time
-from mapping import *                                                                               #Import mapping.py functions
+path = "./output"                               #enter output path
+genomePath = "/data/Ecoli_genome.fasta"         #enter reference genome location
+readPath = "data/reads_new.fasta"               #enter read location
+
+createReport = True                             #enter boolean value, Do you want to create analysis and report?
+repOut = "output/img"                           #enter report image outputfolder
+
 
 print("Currently:", time.ctime())
-path = "./output"                                                                                   #specify path for output
 
 # Running the read-mapper defined in mapping.py
-genome = getGenome("data/Ecoli_genome.fasta")                                                       #parse genome and genome description to array
-Reads = getReads("data/reads_new.fasta")                                                            #parse reads to array
+genome = getGenome((str(pathlib.Path().resolve())[:-4])+genomePath)
+Reads = getReads((str(pathlib.Path().resolve())[:-4])+readPath)
 
-mapped = mapGenome(genome,Reads)                                                                    #map reads to genome
+mapped = mapGenome(genome,Reads)                             #mapping reads
 
-MapSummary(mapped, genome, path)                                                                    #generate .csv summary in output path
-Barplot(Reads,mapped, genome, path)                                                                 #generate barplot for overview
-
-#Run R-script
+file = MapSummary(mapped, genome, path)
+Barplot(mapped, genome, path)
 
 
-        #please enter image output path
-robjects.r('''
-output <- 'C:/Users/nikla/Desktop/readmap_fin/read-mapping/output/img'
-''')
-        #please enter genome.fasta input path
-robjects.r('''
-inputGenome <- "C:/Users/nikla/Desktop/readmap_fin/read-mapping/data/Ecoli_genome.fasta"
-''')
-        #please enter MapSummary input path
-robjects.r('''
-pathMap <- "C:/Users/nikla/Desktop/readmap_fin/read-mapping/output/2023-01-27_NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.csv"
-''')
-robjects.r.source("read-vis.R")
+
+#Optional: create report
+
+if not createReport:
+    pass
+else:
+    robjects.globalenv['out'] = repOut
+    robjects.globalenv['inputGen'] = genomePath
+    robjects.globalenv['mapfile'] = file
+    robjects.r.source("Report.R")
+
 
 #+end_src
 
@@ -271,11 +273,11 @@ Process finished with exit code 0
 #+end_src
 
 
-*** A first glance at mapping results
+*** A first glance at mapping results by Barplot()
 
 [[./output/2023-01-27_NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.png]]
 
-** python returns a .csv file
+** MapSummary() returns a .csv file
 
 Output of the MapSummary function:
 
