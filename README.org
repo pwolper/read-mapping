@@ -69,7 +69,7 @@ Our code is divided in four parts:
 
 1. *Report.R*: *Link* to knit R markdown report
     
-1. *read-vis.R*: R markdown file for *visualization* and *report*
+1. *read-vis.Rmd*: R markdown file for *visualization* and *report*
 
 
 ** mapping.py
