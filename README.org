@@ -14,11 +14,12 @@ _“Mapping” the reads from NGS data to the genome_
 
 - Please provide the infographics showing how many reads have been mapped to the genome, how many have been mapped several times (how many times exactly?), how many haven’t been mapped.
 
-* Genome Mapping
 
-Genome mapping describes the identification of location as well distance of molecular markers on the genome. Often these markers are genes, but all other sequences could be of interest.
+* Read Mapping
+Read mapping refers to the process of aligning sequences from sequencing reads to a reference genome. Sequencing reads from various technologies such as Illumina, RNA-seq or ChIP-sequencing can be used.
 
-Maps can be used as scaffolds for Whole Genome Sequencing (WGS), but also for many other downstreamm studies. Therefore they can help in understanding the genome of a certain species, identify disease markers or causes and even evolutionary studies. 
+Commonly read mapping is one of the the first steps of next-generation sequencing analysis. By mapping single reads to a reference genome it becomes possible to construct a reference genome from the sequencing data and allows for further analysis such as variant calling or whole-genome alignments.
+
 
 * Data
 
