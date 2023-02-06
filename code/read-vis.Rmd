@@ -9,6 +9,9 @@ params:
 
 ---
 
+# Link to GitHub Repository
+Link to GitHub repository: https://github.com/pwolper/read-mapping
+
 # Visualisation of mapped sequencing reads
 ```{R message=F, echo = FALSE}
 library(ggplot2)
@@ -130,7 +133,7 @@ MapNum <- MapNum %>%                                 #Calculate positions for la
 ```
 
 ## Plotting mapped reads
-```{R}
+```{R echo=FALSE}
 p1 <- ggplot(reads, aes(x = pos, y = ..density..)) +
   geom_histogram(bins = 155, color = "green4", fill = "green2") + 
   geom_density(color = "darkgreen", lwd=1.3, bw = 70000)+
