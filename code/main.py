@@ -10,7 +10,7 @@ path = str(pathlib.Path().resolve().parents[0]) + "/output"                     
 genomePath = "/data/Ecoli_genome.fasta"         #enter reference genome location
 readPath = "/data/reads_new.fasta"               #enter read location
 
-createReport = True                             #enter boolean value, Do you want to create analysis and report?
+createReport = False                             #enter boolean value, Do you want to create analysis and report?
 repOut = "output/img"                           #enter report image outputfolder
 
 
