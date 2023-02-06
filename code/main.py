@@ -15,24 +15,30 @@ Reads = getReads((str(pathlib.Path().resolve())[:-4])+"data/reads_new.fasta")
 
 mapped = mapGenome(genome,Reads)                             #mapping reads
 
-MapSummary(mapped, genome, path)
+file = MapSummary(mapped, genome, path)
 Barplot(mapped, genome, path)
 
 
 
-#Run R-script
+#Optional: create report
 
 
         #please enter image output path
 robjects.r('''
-output <- 'C:/Users/nikla/Desktop/readmap_fin/read-mapping/output/img'
+out = "output/img"
 ''')
         #please enter genome.fasta input path
 robjects.r('''
-inputGenome <- "C:/Users/nikla/Desktop/readmap_fin/read-mapping/data/Ecoli_genome.fasta"
+inputGen <- "data/Ecoli_genome.fasta"
 ''')
         #please enter MapSummary input path
-robjects.r('''
-pathMap <- "C:/Users/nikla/Desktop/readmap_fin/read-mapping/output/2023-01-27_NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.csv"
-''')
-robjects.r.source("read-vis.R")
+
+robjects.globalenv['mapfile'] = file
+
+
+
+robjects.r.source("Report.R")
+
+
+
+

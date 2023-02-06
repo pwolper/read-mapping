@@ -81,7 +81,7 @@ def MapSummary(mappedGenome, gotGenome, path = "./"):          #create a summary
             cols = [str(read),sense,anti,str(n_sense),str(n_anti),str(n_total)]
             f.writerow(cols)
             # entry = ";".join(str(x) for x in cols)
-
+    return(fileName)
     print("Successfully wrote summary file to",path,"!")
 
 def mapGenome(genomes, Reads):                                      #return dictionary with genome description and read as key and starting positions in genome as value (returns list of list

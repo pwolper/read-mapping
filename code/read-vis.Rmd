@@ -1,5 +1,15 @@
-# Visualisation of mapped sequencing reads
+---
+output:
+  pdf_document: default
+  html_document: default
+params:
+  out: "output/img"
+  mapfile: "2023-01-27_NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.csv"
+  inputGen: "data/Ecoli_genome.fasta"
 
+---
+
+# Visualisation of mapped sequencing reads
 ```{R message=F, echo = FALSE}
 library(ggplot2)
 library(dplyr)
@@ -26,33 +36,28 @@ if (!require(ggpubr)) {
 The following packages were used for this anlysis: ggplot2, dplyr, purrr, here, ape, ggrepel, ggpubr.
 
 Define in- and output directories in case of running script separately:
-```{R echo=FALSE, eval = FALSE}
-if(exists("output")){
-}else{
-  output <- here("output/img")
-}
-##Genome Input
-if(exists("inputGenome")){
-}else{
-inputGenome <- here("data/Ecoli_genome.fasta")
-}
-##input from summary from mapping.py
-if(exists("pathMap")){
-}else{
-mapfile <- "2023-01-27_NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome.csv"
-pathMap <- here("output/",mapfile)
-}
-if (file.exists(output)){
+```{R echo=FALSE, results = FALSE}
 
+##Outputfolder
+output <- here(params$out)
+if (file.exists(output)){
 } else {
     dir.create(file.path(output))
-
 }
+##Genome Input
+
+inputGenome <- here(params$inputGen)
+
+##input from summary from mapping.py
+ 
+pathMap <- here("output/",params$mapfile)
+
+
 
 ```
-```{R echo = FALSE}
+```{R echo=FALSE}
 inputGenome
-mapfile
+params$mapfile
 ```
 ```{R}
 genome <- read.dna(inputGenome,format="fasta")
