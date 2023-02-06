@@ -8,8 +8,10 @@ params:
   inputGen: "data/Ecoli_genome.fasta"
 
 ---
+# Read mapping project - 01/2023 - Group 13
+Niklas Horner, Abdullah Cetinkaya, Philip Wolper
 
-# Link to GitHub Repository
+## Link to GitHub Repository
 Link to GitHub repository: https://github.com/pwolper/read-mapping
 
 # Visualisation of mapped sequencing reads
