@@ -1,7 +1,19 @@
 
 #needed as link to read-vis.Rmd
 
-rmarkdown::render("read-vis.Rmd",params = list(out,mapfile,inputGen))
+para = list(out = out,mapfile = mapfile,inputGen = inputGen)
+
+if (!require("rmarkdown")) {
+  install.packages("rmarkdown")
+  library(rmarkdown)
+}
+if (!require("knitr")) {
+  install.packages("knitr")
+  library(knitr)
+}
+
+
+render("read-vis.Rmd",params = para)
 
 
 
