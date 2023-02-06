@@ -5,13 +5,20 @@ import pathlib
 import rpy2.robjects as robjects
 
 
-print("Currently:", time.ctime())
-path = "./output"
 
+path = "./output"                               #enter output path
+genomePath = "/data/Ecoli_genome.fasta"         #enter reference genome location
+readPath = "data/reads_new.fasta"               #enter read location
+
+createReport = True                             #enter boolean value, Do you want to create analysis and report?
+repOut = "output/img"                           #enter report image outputfolder
+
+
+print("Currently:", time.ctime())
 
 # Running the read-mapper defined in mapping.py
-genome = getGenome((str(pathlib.Path().resolve())[:-4])+"/data/Ecoli_genome.fasta")
-Reads = getReads((str(pathlib.Path().resolve())[:-4])+"data/reads_new.fasta")
+genome = getGenome((str(pathlib.Path().resolve())[:-4])+genomePath)
+Reads = getReads((str(pathlib.Path().resolve())[:-4])+readPath)
 
 mapped = mapGenome(genome,Reads)                             #mapping reads
 
@@ -22,22 +29,13 @@ Barplot(mapped, genome, path)
 
 #Optional: create report
 
-
-        #please enter image output path
-robjects.r('''
-out = "output/img"
-''')
-        #please enter genome.fasta input path
-robjects.r('''
-inputGen <- "data/Ecoli_genome.fasta"
-''')
-        #please enter MapSummary input path
-
-robjects.globalenv['mapfile'] = file
-
-
-
-robjects.r.source("Report.R")
+if not createReport:
+    pass
+else:
+    robjects.globalenv['out'] = repOut
+    robjects.globalenv['inputGen'] = genomePath
+    robjects.globalenv['mapfile'] = file
+    robjects.r.source("Report.R")
 
 
 
