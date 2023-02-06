@@ -6,9 +6,9 @@ import rpy2.robjects as robjects
 
 
 
-path = "./output"                               #enter output path
+path = str(pathlib.Path().resolve().parents[0]) + "/output"                               #enter output path
 genomePath = "/data/Ecoli_genome.fasta"         #enter reference genome location
-readPath = "data/reads_new.fasta"               #enter read location
+readPath = "/data/reads_new.fasta"               #enter read location
 
 createReport = True                             #enter boolean value, Do you want to create analysis and report?
 repOut = "output/img"                           #enter report image outputfolder
@@ -17,8 +17,8 @@ repOut = "output/img"                           #enter report image outputfolder
 print("Currently:", time.ctime())
 
 # Running the read-mapper defined in mapping.py
-genome = getGenome((str(pathlib.Path().resolve())[:-4])+genomePath)
-Reads = getReads((str(pathlib.Path().resolve())[:-4])+readPath)
+genome = getGenome((str(pathlib.Path().resolve().parents[0]))+genomePath)
+Reads = getReads((str(pathlib.Path().resolve().parents[0]))+readPath)
 
 mapped = mapGenome(genome,Reads)                             #mapping reads
 
